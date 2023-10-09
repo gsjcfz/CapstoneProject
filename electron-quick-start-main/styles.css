@@ -1,3 +1,45 @@
-/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-/* Add styles here to customize the appearance of your app */
+.menu {
+    text-align: center;
+    background-color: #333;
+    padding: 2em;
+    border-radius: 8px;
+}
+
+
+.menu h1 {
+    color: white;
+}
+
+.game-text h1{
+    color: white;
+}
+
+.settings ul{
+    color: white;
+}
+button {
+    margin: 1em;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+#backToMenu {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
