@@ -16,6 +16,10 @@ function createMainWindow() {
     });
 
     mainWindow.loadFile('index.html');
+
+    mainWindow.on('closed', () => {
+        mainWindow = null;
+    });
 }
 
 function createGameWindow() {
@@ -28,8 +32,13 @@ function createGameWindow() {
         }
     });
 
-    gameWindow.loadFile('game.html');
+    gameWindow.loadFile('multiplechoice.html');
+
+    gameWindow.on('closed', () => {
+        gameWindow = null;
+    });
 }
+
 
 function createSettingsWindow() {
     settingsWindow = new BrowserWindow({
@@ -42,6 +51,10 @@ function createSettingsWindow() {
     });
 
     settingsWindow.loadFile('settings.html');
+
+    settingsWindow.on('closed', () => {
+        settingsWindow = null;
+    });
 }
 
 app.on('ready', createMainWindow);
@@ -59,9 +72,15 @@ app.on('activate', () => {
 });
 
 ipcMain.on('start-game', (event, arg) => {
-    mainWindow.close();
-    createGameWindow();
+    if (mainWindow) {
+        mainWindow.close();
+        mainWindow = null; // Explicitly set to null for clarity
+    }
+    if (!gameWindow) { // Only create a new game window if one doesn't already exist
+        createGameWindow();
+    }
 });
+
 
 ipcMain.on('open-settings', (event, arg) => {
     console.log('Opening settings...');
@@ -69,11 +88,16 @@ ipcMain.on('open-settings', (event, arg) => {
 });
 
 ipcMain.on('back-to-menu', (event, arg) => {
-    if (gameWindow && !gameWindow.isDestroyed()) gameWindow.close();
-    if (settingsWindow && !settingsWindow.isDestroyed()) settingsWindow.close();
+    if (gameWindow) {
+        gameWindow.close();
+        gameWindow = null; // Explicitly set to null for clarity
+    }
+    if (settingsWindow) {
+        settingsWindow.close();
+        settingsWindow = null; // Explicitly set to null for clarity
+    }
     createMainWindow();
 });
-
 
 ipcMain.on('exit-game', (event, arg) => {
     app.quit();
