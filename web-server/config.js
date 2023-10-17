@@ -4,7 +4,13 @@
  */
 
 const config = {
-    example: "Example config value",
+    db: {
+        host                : "db4free.net",
+        user                : process.env.DB_USERNAME,
+        password            : process.env.DB_PASSWORD,
+        database            : process.env.DB_NAME,
+        connectionTimeout   : 60000
+    },
 }
 
 module.exports = config;
