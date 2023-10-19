@@ -1,5 +1,6 @@
 const express = require("express");
-const example_router = require("./routes/example")
+const example_router = require("./routes/example");
+const question_router = require("./routes/question");
 const app = express();
 const port = 3000;
 
@@ -19,6 +20,7 @@ app.listen(port, () => {
 });
 
 app.use("/example", example_router);
+app.use("/question", question_router);
 
 // Hello world test endpoint
 app.get("/hello", (request, response) => {
