@@ -8,6 +8,14 @@ function example_helper()
     return "Example helper!";
 }
 
+function getTuples(rows) {
+    if (!rows) {
+      return [];
+    }
+    return rows;
+  }
+
 module.exports = {
     example_helper,
+    getTuples
 }
