@@ -3,12 +3,12 @@ const config = require('../config');
 const db = require('./db')
 
 //CHECK ^^^^  Down should work?
-async function create_question(question){
+async function create_question(QUESTION){
     const result = await db.query(
-      `INSERT INTO questions 
-      (question_ID, question_type, level, image_ID, pack_ID) 
+      `INSERT INTO QUESTION 
+      (type, level, point_value, image_ID, pack_ID) 
       VALUES 
-      ('${question.question_ID}', ${question.question_type}, ${question.level}, ${question.image_ID}, ${question.pack_ID})`
+      (${QUESTION.type}, ${QUESTION.level}, ${QUESTION.point_value}, ${QUESTION.image_ID}, ${QUESTION.pack_ID})`
     );
   
     let message = 'Error in creating questions';
