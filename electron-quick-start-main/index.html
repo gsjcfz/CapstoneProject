@@ -12,6 +12,7 @@
         <h1>My Game</h1>
         <button id="start">Start Game</button>
         <button id="settings">Settings</button>
+        <button id="instructorview">Instructor View</button>
         <button id="exit">Exit</button>
     </div>
 
@@ -27,6 +28,10 @@
 
     document.getElementById('exit').addEventListener('click', () => {
         window.myAPI.send('exit-game');
+    });
+
+    document.getElementById('instructorview').addEventListener('click', () => {
+        window.myAPI.send('instructor-view');
     });
 
     </script>
