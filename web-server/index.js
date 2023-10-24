@@ -1,6 +1,7 @@
 require("dotenv").config({path: "./.env"});
 const express = require("express");
 const example_router = require("./routes/example");
+const packRouter = require("./routes/pack");
 const leaderboard_router = require("./routes/leaderboard");
 const score_router = require("./routes/playerscore");
 const app = express();
@@ -15,13 +16,13 @@ app.use(
     })
 );
 
-
 // Listen on the given port
 app.listen(port, () => {
     console.log("Server Listening on port ", port);
 });
 
 app.use("/example", example_router);
+app.use("/pack", packRouter);
 app.use("/leaderboard", score_router);
 app.use("/playerscore", score_router);
 
