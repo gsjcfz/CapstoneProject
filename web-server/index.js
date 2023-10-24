@@ -1,7 +1,9 @@
-require("dotenv").config();
+require("dotenv").config({path: "./.env"});
 const express = require("express");
 const example_router = require("./routes/example");
-const packRouter = require('./routes/pack');
+const packRouter = require("./routes/pack");
+const leaderboard_router = require("./routes/leaderboard");
+const score_router = require("./routes/playerscore");
 const app = express();
 const port = 3000;
 
@@ -20,7 +22,9 @@ app.listen(port, () => {
 });
 
 app.use("/example", example_router);
-app.use('/pack', packRouter);
+app.use("/pack", packRouter);
+app.use("/leaderboard", score_router);
+app.use("/playerscore", score_router);
 
 // Hello world test endpoint
 app.get("/hello", (request, response) => {
