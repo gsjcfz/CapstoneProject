@@ -34,12 +34,11 @@ async function login(user) {
     }
     // Compare the given password with the hash stored in the DB
     var result = await mycrypt.compareHash(user.password, get_user.password);
-    console.log(result);
     if (!result) {
         return null;
     }
     // Generate and return an access token
-    return mycrypt.generateToken(user.username);
+    return mycrypt.generateToken(user.name);
 }
 
 module.exports = {

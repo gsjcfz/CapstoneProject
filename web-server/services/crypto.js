@@ -10,10 +10,7 @@ async function generateHash(password) {
 }
 
 async function compareHash(password, hash) {
-    bcrypt.compare(password, hash, function(err, match) {
-        if (err) { throw err; }
-        return match;
-    });
+    return await bcrypt.compare(password, hash);
 }
 
 function generateToken(username) {
