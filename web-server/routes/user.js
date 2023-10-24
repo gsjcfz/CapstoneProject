@@ -3,7 +3,7 @@ const user = require('../services/user');
 
 const router = express.Router();
 
-router.put('/', async function(req, res, next) {
+router.post('/', async function(req, res, next) {
     try {
         res.json(await user.createAccount(req.body));
     } catch (err) {
@@ -11,3 +11,5 @@ router.put('/', async function(req, res, next) {
         next(err);
     }
 });
+
+module.exports = router;

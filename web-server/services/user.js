@@ -1,5 +1,5 @@
-const db = require('.db');
-const mycrypt = require('.crypto');
+const db = require('./db');
+const mycrypt = require('./crypto');
 const config = require('../config');
 
 async function createAccount(user) {
@@ -7,11 +7,11 @@ async function createAccount(user) {
     const pass_hash = await mycrypt.generateHash(user.password);
     // Insert the new user into the database (with the hashed password)
     const result = await db.query(
-        `INSERT INTO APP_USER (name, password, professor)
-        VALUES (${user.name}, ${pass_hash}, ${user.professor})`
+        `INSERT INTO \`USER\` (\`name\`, \`password\`, \`professor\`)
+        VALUES ("${user.name}", "${pass_hash}", ${user.professor})`
     );
     // If there are no affected rows, we return an error message
-    let message = 'Error in adding new user'
+    let message = 'After running the query, SQL has not added the new user to the database'
     if (result.affectedRows) {
         message = 'New user created successfully'
     }
@@ -23,8 +23,8 @@ async function login(user) {
     // See if the user with the username is in the database
     var get_user = await db.query(
         `SELECT *
-        FROM APP_USER
-        WHERE NAME = '${user.name}'`
+        FROM \`USER\`
+        WHERE \`name\` = '${user.name}'`
     );
     if (!get_user) {
         get_user = [];
@@ -34,6 +34,7 @@ async function login(user) {
     }
     // Compare the given password with the hash stored in the DB
     var result = await mycrypt.compareHash(user.password, get_user.password);
+    console.log(result);
     if (!result) {
         return null;
     }
