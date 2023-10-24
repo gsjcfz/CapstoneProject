@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const example_router = require("./routes/example");
+const packRouter = require('./routes/pack');
 const app = express();
 const port = 3000;
 
@@ -13,13 +14,13 @@ app.use(
     })
 );
 
-
 // Listen on the given port
 app.listen(port, () => {
     console.log("Server Listening on port ", port);
 });
 
 app.use("/example", example_router);
+app.use('/pack', packRouter);
 
 // Hello world test endpoint
 app.get("/hello", (request, response) => {
