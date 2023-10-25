@@ -50,6 +50,23 @@ function createSettingsWindow() {
         }
     });
 
+    settingsWindow.loadFile('packviewer.html');
+
+    settingsWindow.on('closed', () => {
+        settingsWindow = null;
+    });
+}
+
+function createViewPackagesWindow() {
+    settingsWindow = new BrowserWindow({
+        width: 600,
+        height: 400,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true
+        }
+    });
+
     settingsWindow.loadFile('settings.html');
 
     settingsWindow.on('closed', () => {
