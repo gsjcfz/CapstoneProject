@@ -4,6 +4,7 @@ const path = require('path');
 let mainWindow;
 let gameWindow;
 let settingsWindow;
+let instructorWindow;
 
 function createMainWindow() {
     mainWindow = new BrowserWindow({
@@ -74,6 +75,23 @@ function createViewPackagesWindow() {
     });
 }
 
+function createInstructorWindow() {
+    instructorWindow = new BrowserWindow({
+        width: 1024,
+        height: 768,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true
+        }
+    });
+
+    instructorWindow.loadFile('instructorview.html');
+
+    instructorWindow.on('closed', () => {
+        instructorWindow = null;
+    });
+}
+
 app.on('ready', createMainWindow);
 
 app.on('window-all-closed', () => {
@@ -104,6 +122,17 @@ ipcMain.on('open-settings', (event, arg) => {
     createSettingsWindow();
 });
 
+ipcMain.on('instructor-view', (event, arg) => {
+    if (mainWindow) {
+        mainWindow.close();
+        mainWindow = null; // Explicitly set to null for clarity
+    }
+    if (!instructorWindow) { // Only create a new instructor window if one doesn't already exist
+        console.log('Opening instructor view...');
+        createInstructorWindow();
+    }
+});
+
 ipcMain.on('back-to-menu', (event, arg) => {
     if (gameWindow) {
         gameWindow.close();
@@ -112,6 +141,10 @@ ipcMain.on('back-to-menu', (event, arg) => {
     if (settingsWindow) {
         settingsWindow.close();
         settingsWindow = null; // Explicitly set to null for clarity
+    }
+    if (instructorWindow) {
+        instructorWindow.close();
+        instructorWindow = null; // Explicitly set to null for clarity
     }
     createMainWindow();
 });

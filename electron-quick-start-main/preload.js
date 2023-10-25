@@ -4,7 +4,7 @@ contextBridge.exposeInMainWorld(
     "myAPI", {
         send: (channel, data) => {
             // whitelist channels
-            let validChannels = ["start-game", "open-settings", "exit-game", "back-to-menu"];
+            let validChannels = ["start-game", "open-settings", "exit-game", "back-to-menu", "instructor-view"];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);
             }

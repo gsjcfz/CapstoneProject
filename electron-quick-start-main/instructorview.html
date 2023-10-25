@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor View</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="instructorview.js" defer></script>
+</head>
+<body>
+    <div class="instructor-add-questions">
+
+        <!-- Return to Menu button -->
+        <button id="return_to_menu" class="menu-button">Return to Menu</button>
+        
+        
+        <h3 id="iv-question-type-text">Select Question Type: </h3>
+        <select name="question-type" id="question-type">
+            <option value="multiplechoice">Multiple choice</option>
+            <option value="definintionmatching">Definition matching</option>
+            <option value="visualdiagram">Visual diagram</option>
+            <option value="mathquestion">Math Question</option>
+            <option value="checkallthatapply">Check all that apply</option>
+        </select>
+
+        <h3 id="iv-prompt">Question Prompt: </h3>
+        <textarea id="prompt" name="prompt" rows="10" cols="50"></textarea>
+
+        <h3 id="iv-number-of-answers">Number of Answers: </h3>
+        <button id="decrease" class="number_of_answers">-</button>
+        <input type="text" id="num_answers" name="num_answers"><br>
+        <button id="increase" class="number_of_answers">+</button>
+
+        <h3 id="correct_answer">Select Correct Answer: </h3>
+        <select name="correct_answer_selection" id="correct_answer_selection">
+            <option value="answer_A">A</option>
+            <option value="answer_B">B</option>
+            <option value="answer_C">C</option>
+            <option value="answer_D">D</option>
+            <option value="answer_E">E</option>
+        </select>
+
+        
+    </div>
+</body>
+</html>
