@@ -4,6 +4,8 @@ const example_router = require("./routes/example");
 const packRouter = require("./routes/pack");
 const leaderboard_router = require("./routes/leaderboard");
 const score_router = require("./routes/playerscore");
+const userRouter = require("./routes/user");
+const loginRouter = require("./routes/login");
 const app = express();
 const port = 3000;
 
@@ -25,6 +27,9 @@ app.use("/example", example_router);
 app.use("/pack", packRouter);
 app.use("/leaderboard", score_router);
 app.use("/playerscore", score_router);
+
+app.use("/user", userRouter);
+app.use("/user/login", loginRouter);
 
 // Hello world test endpoint
 app.get("/hello", (request, response) => {
