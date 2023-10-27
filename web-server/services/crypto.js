@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const std_err = require('../helper').std_err;
 const saltRounds = 10;
 
 async function generateHash(password) {
@@ -21,21 +22,21 @@ function generateToken(username) {
 function authenticateToken(req, res, next) {
     // parse the token out of the req
     const authHeader = req.headers['authorization'];
-    // Handle a bad request (one without an authorization header)
+    // Handle a request without an authorization header
     if (!(authHeader)) {
-        res.sendStatus(401);
+        res.status(401).json(std_err(401));
     }
     const token = authHeader.split(' ')[1];
 
     // using jwt and the token secret, verify the token
     jwt.verify(token, process.env.TOKEN_SECRET, function(err, username) {
-        // if we got thrown an error verifying the token, the token is invalid and we throw a 403 error
+        // if we got thrown an error verifying the token, the token is invalid and we throw a 401 error
         if (err) {
             console.log(err);
-            res.sendStatus(403);
+            res.status(401).json(std_err(401));
         }
         // otherwise, set the username value in the request and move on
-        req.username = username;
+        req.auth_username = username;
         next()
     });
 }
