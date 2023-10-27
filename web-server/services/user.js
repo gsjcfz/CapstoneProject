@@ -10,13 +10,14 @@ async function createAccount(user) {
         `INSERT INTO \`USER\` (\`name\`, \`password\`, \`professor\`)
         VALUES ("${user.name}", "${pass_hash}", ${user.professor})`
     );
-    // If there are no affected rows, we return an error message
-    let message = 'After running the query, SQL has not added the new user to the database'
+    let response = {
+        success : false
+    };
     if (result.affectedRows) {
-        message = 'New user created successfully'
+        response.success = true;
     }
 
-    return {message};
+    return response;
 }
 
 async function login(user) {
@@ -26,19 +27,28 @@ async function login(user) {
         FROM \`USER\`
         WHERE \`name\` = '${user.name}'`
     );
-    if (!get_user) {
-        get_user = [];
+
+    let response = {
+        success : false,
+        message : "Username or password is incorrect",
+        token   : null
+    };
+
+    if (get_user[0] === undefined) {
+        return response;
     }
-    else {
-        get_user = get_user[0];
-    }
+    get_user = get_user[0];
+
     // Compare the given password with the hash stored in the DB
     var result = await mycrypt.compareHash(user.password, get_user.password);
     if (!result) {
-        return null;
+        return response;
     }
     // Generate and return an access token
-    return mycrypt.generateToken(user.name);
+    response.success = true
+    response.message = "Login successful"
+    response.token = mycrypt.generateToken(user.name);
+    return response;
 }
 
 module.exports = {
