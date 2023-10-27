@@ -29,11 +29,10 @@ function authenticateToken(req, res, next) {
     const token = authHeader.split(' ')[1];
 
     // using jwt and the token secret, verify the token
-    jwt.verify(token, process.env.TOKEN_SECRET, function(err, username) {
+    const result = jwt.verify(token, process.env.TOKEN_SECRET, function(err, username) {
         // if we got thrown an error verifying the token, the token is invalid and we throw a 401 error
         if (err) {
-            console.log(err);
-            res.status(401).json(std_err(401));
+            return res.status(401).json(std_err(401));
         }
         // otherwise, set the username value in the request and move on
         req.auth_username = username;

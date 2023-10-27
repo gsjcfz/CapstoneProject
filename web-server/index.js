@@ -27,9 +27,9 @@ app.listen(port, () => {
 });
 
 app.use("/example", mycrypt.authenticateToken, example_router);
-app.use("/pack", packRouter);
-app.use("/leaderboard", leaderboard_router);
-app.use("/playerscore", score_router);
+app.use("/pack", mycrypt.authenticateToken, packRouter);
+app.use("/leaderboard", mycrypt.authenticateToken, leaderboard_router);
+app.use("/playerscore", mycrypt.authenticateToken, score_router);
 
 app.use("/user", userRouter);
 app.use("/user/login", loginRouter);
