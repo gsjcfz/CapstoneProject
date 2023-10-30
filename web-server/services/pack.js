@@ -16,6 +16,42 @@ async function listPacks(){
   }
 }
 
+/* POST a new pack */
+async function createPack(pack){
+  const result = await db.query(
+    `INSERT INTO \`PACK\`
+    (\`name\`, \`user_ID\`) 
+    VALUES 
+    ('${pack.name}', ${pack.user_ID})`
+  );
+
+  let message = 'Error in creating pack';
+
+  if (result.affectedRows) {
+    message = 'Pack created successfully';
+  }
+
+  return {message};
+}
+
+/* DELETE a pack */
+async function removePack(id){
+  const result = await db.query(
+    `DELETE FROM \`PACK\` WHERE \`ID\` = ${id}`
+  );
+
+  let message = 'Error in deleting pack';
+
+  if (result.affectedRows) {
+    message = 'Pack deleted successfully';
+  }
+
+  return {message};
+}
+
+
 module.exports = {
-  listPacks
+  listPacks,
+  createPack,
+  removePack
 }
