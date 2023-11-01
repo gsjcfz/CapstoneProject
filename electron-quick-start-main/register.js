@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const username = document.getElementById('reg-username').value;
         const password = document.getElementById('reg-password').value;
         const retypePassword = document.getElementById('reg-retype-password').value;
+        const isProfessor = document.getElementById('professor-checkbox').checked; // capture the value of the checkbox
 
         if (password !== retypePassword) {
             alert('Passwords do not match!');
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const user = {
             name: username,
             password: password,
-            professor: false // You might want to change this based on your app's logic.
+            professor: isProfessor 
         };
 
         try {
