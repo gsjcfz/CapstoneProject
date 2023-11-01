@@ -220,4 +220,125 @@ h1#mc_question {
     text-align: center;
 }
 
+/*instructor view styles*/
+.iv-question-type {
+    position: fixed;
+    top: 70px;
+    left: 100px;
+    background-color: blueviolet;
+    display: flex;
+}
+
+#iv-question-type-text {
+    width: 200px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#question-type-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+} 
+
+.iv-question-prompt {
+    position: fixed;
+    top: 140px;
+    left: 100px;
+    background-color: blue;
+    display: flex;
+}
+
+#iv-prompt-text {
+    width: 200px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#prompt {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 80px;
+    width: 250px;
+}
+
+.iv-answers-setup {
+    position: fixed;
+    top: 260px;
+    left: 100px;
+    background-color: goldenrod;
+}
+
+.iv-number-of-answers {
+    position: relative;
+    background-color: maroon;
+    margin: 10px;
+    display: flex;
+}
+
+#iv-number-of-answers-text {
+    position: relative;
+    width: 200px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#decrease {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#num_answers {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: white;
+    text-align: center;
+    line-height: 30px;
+    color: black;
+}
+
+#increase {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.iv-correct-answer {
+    position: relative;
+    background-color: green;
+    margin: 10px;
+    display: flex;
+}
+
+#correct-answer-text {
+    width: 230px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#correct-answer-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
 /* Reusing the same styles for input-group, label, input, and button from the login page */
