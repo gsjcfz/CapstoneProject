@@ -13,6 +13,24 @@ router.post('/', async function(req, res, next) {
     }
   });
 
+  router.get('/', async function(req, res, next) {
+    try {
+      res.json(await question.get_question(req.query.pack, req.query.question));
+    } catch (err) {
+      console.error(`Error while getting programming languages `, err.message);
+      next(err);
+    }
+  });
+
+  router.get('/', async function(req, res, next) {
+    try {
+      res.json(await question.get_all_questions(req.query.pack));
+    } catch (err) {
+      console.error(`Error while getting programming languages `, err.message);
+      next(err);
+    }
+  });
+
 module.exports = router;
 
 

@@ -19,7 +19,38 @@ async function create_question(QUESTION){
   
     return {message};
   }
+//Get Question
+async function get_question(QUESTION){
+  const result = await db.query(
+    `SELECT *
+    FROM \`QUESTION\`
+    WHERE \`QUESTION_ID\` = ${QUESTION.ID}
+    AND  \`QUESTION_PACK_ID\` = ${QUESTION.PACK_ID}`
+  );
+  if (!result){
+    result = [];
+  }
+  return result;
+
+  }
+//Get All Questions from a PACK
+async function get_all_questions(PACK){
+  const result = await db.query(
+    `SELECT *
+    FROM \`QUESTIONS\`
+    WHERE \`QUESTION_PACK_ID\` = ${PACK.ID}`
+  );
+  if (!result){
+    result = [];
+  }
+  return result
+  }
 
   module.exports = {
     create_question,
-}
+    get_question,
+    get_all_questions
+  }
+
+//Get Question
+//Get All Question in pack?
