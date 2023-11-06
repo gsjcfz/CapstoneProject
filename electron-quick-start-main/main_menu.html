@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Game Menu</title>
+</head>
+<body>
+    <div class="menu">
+        <h1>My Game</h1>
+        <button id="start">Start Game</button>
+        <button id="settings">Settings</button>
+        <button id="exit">Exit</button>
+    </div>
+
+    <script>
+        document.getElementById('start').addEventListener('click', () => {
+            window.myAPI.send('navigate', 'game');
+        });
+
+        document.getElementById('settings').addEventListener('click', () => {
+            window.myAPI.send('navigate', 'settings');
+        });
+
+        document.getElementById('exit').addEventListener('click', () => {
+            window.myAPI.send('exit-game');
+        });
+    </script>
+</body>
+</html>
