@@ -7,7 +7,7 @@ async function listPacks(){
   const rows = await db.query(
     `SELECT \`PACK\`.*, \`USER\`.\`name\`
     FROM \`PACK\` INNER JOIN \`USER\` 
-      ON \`PACK\`.\`user_ID\` = \`USER\`.\`ID\`;`
+      ON \`PACK\`.\`username\` = \`USER\`.\`name\`;`
   );
   const data = helper.getTuples(rows);
 

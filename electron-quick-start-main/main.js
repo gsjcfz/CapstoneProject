@@ -46,7 +46,7 @@ ipcMain.on('navigate', (event, page) => {
                 mainWindow.loadFile('index.html');
                 break;
             case 'game':
-                mainWindow.loadFile('multiplechoice.html');
+                mainWindow.loadFile('pack_list.html');
                 break;
             case 'settings':
                 mainWindow.loadFile('settings.html');
