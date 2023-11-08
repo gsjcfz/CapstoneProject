@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', async function(event) {
         .then(response => response.json())
         .then(data => {
             // Remove our skeleton packs
-            const skeletons = document.getElementsByClassName("skeleton-pack");
-            for (let i of skeletons) {
-                skeletons[i].remove();
+            const skeletons = document.querySelectorAll(".skeleton");
+            for (let i = 0; i < skeletons.length; i++) {
+                skeletons.item(i).remove();
             }
             // Add the pack data
             for (let i = 0; i < data.data.length; i++) {
