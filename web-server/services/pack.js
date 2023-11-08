@@ -16,6 +16,31 @@ async function listPacks(){
   }
 }
 
+/* GET list of packs with user score */
+async function listPacksScores(username){
+  const rows = await db.query(
+    `SELECT T.\`ID\`, T.\`name\`, T.\`points_total\`, U.\`pack_score\`
+    FROM (
+        (SELECT P.\`ID\`, P.\`name\`, SUM(Q.point_value) AS \`points_total\`
+          FROM \`PACK\` P
+              JOIN \`QUESTION\` Q
+              ON P.\`ID\`=Q.\`pack_ID\`
+          GROUP BY P.\`ID\`, P.\`name\`
+          ) T
+      LEFT JOIN (
+          SELECT *
+          FROM \`USER_SCORE\` C
+          WHERE C.\`username\`="${username}") U
+      ON T.\`ID\` = U.\`pack_ID\`)
+    `
+  );
+  const data = helper.getTuples(rows);
+
+  return {
+    data
+  }
+}
+
 /* POST a new pack */
 async function createPack(pack){
   const result = await db.query(
@@ -52,6 +77,7 @@ async function removePack(id){
 
 module.exports = {
   listPacks,
+  listPacksScores,
   createPack,
   removePack
 }
