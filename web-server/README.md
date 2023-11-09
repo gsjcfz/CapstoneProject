@@ -1,5 +1,18 @@
 # Web Server
 
+## Setup
+
+Create a .env file with the following fields:
+
+```
+DB_USERNAME     = "username for mysql"
+DB_PASSWORD     = "password for mysql"
+DB_NAME         = "name of the mysql database"
+TOKEN_SECRET    = "random 64 byte hex string, generated using require('crypto').randomBytes(64).toString('hex')"
+```
+
+## Description
+
 API endpoints will be .js files in the `routes` directory.
 Each endpoint exports an express.Router() object, which is imported in `index.js`,
 where it is bound to its respective request path using `app.use(path, router)`.

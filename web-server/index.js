@@ -1,6 +1,15 @@
+require("dotenv").config({path: "./.env"});
 const express = require("express");
+const mycrypt = require('./services/crypto');
+
 const example_router = require("./routes/example");
+const packRouter = require("./routes/pack");
+const leaderboard_router = require("./routes/leaderboard");
+const score_router = require("./routes/playerscore");
+const userRouter = require("./routes/user");
+const loginRouter = require("./routes/login");
 const question_router = require("./routes/question");
+
 const app = express();
 const port = 3000;
 
@@ -13,14 +22,19 @@ app.use(
     })
 );
 
-
 // Listen on the given port
 app.listen(port, () => {
     console.log("Server Listening on port ", port);
 });
 
-app.use("/example", example_router);
+app.use("/example", mycrypt.authenticateToken, example_router);
+app.use("/pack", mycrypt.authenticateToken, packRouter);
 app.use("/question", question_router);
+app.use("/leaderboard", mycrypt.authenticateToken, leaderboard_router);
+app.use("/playerscore", mycrypt.authenticateToken, score_router);
+
+app.use("/user", userRouter);
+app.use("/user/login", loginRouter);
 
 // Hello world test endpoint
 app.get("/hello", (request, response) => {
