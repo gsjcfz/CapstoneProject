@@ -19,6 +19,7 @@ async function create_question(QUESTION){
   
     return {message};
   }
+
 //Get Question
 async function get_question(QUESTION){
   const result = await db.query(
@@ -31,14 +32,17 @@ async function get_question(QUESTION){
     result = [];
   }
   return result;
-
   }
+  
 //Get All Questions from a PACK
 async function get_all_questions(PACK){
   const result = await db.query(
-    `SELECT *
-    FROM \`QUESTIONS\`
-    WHERE \`QUESTION_PACK_ID\` = ${PACK.ID}`
+  `SELECT *
+  FROM \`ANSWER\` AS \`A\` INNER JOIN 
+    (\`PROMPT\` AS \`P\` INNER JOIN \`QUESTION\` AS \`Q\`
+    ON \`P\`.\`question_ID\` = \`Q\`.\`ID\`)
+  ON \`A\`.\`prompt_ID\` = \`P\`.\`ID\`
+  WHERE \`Q\`.\`pack_ID\` = ${PACK.ID}`
   );
   if (!result){
     result = [];
