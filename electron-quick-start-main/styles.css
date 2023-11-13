@@ -221,15 +221,33 @@ h1#mc_question {
 }
 
 /*instructor view styles*/
-.iv-question-type {
+.iv-body {
     position: fixed;
+    height: 540px;
     top: 70px;
-    left: 100px;
+    left: 25px;
+    background-color: silver;
+    overflow-y: auto;
+}
+
+.iv-general-all {
+    position: relative;
     background-color: blueviolet;
     display: flex;
+    margin: 10px;
+}
+
+.iv-question-type {
+    position: relative;
+    width: 370px;
+    background-color: blue;
+    display: flex;
+    align-items: baseline;
+    margin: 10px;
 }
 
 #iv-question-type-text {
+    height: 30px;
     width: 200px; /* Increased width */
     background-color: #333;
     border-radius: 8px;
@@ -240,16 +258,15 @@ h1#mc_question {
 #question-type-selection {
     margin-left: 10px;
     margin-right: 10px;
-    align-self: center;
+    top: 10px;
     height: 30px;
 } 
 
 .iv-question-prompt {
-    position: fixed;
-    top: 140px;
-    left: 100px;
+    position: relative;
     background-color: blue;
     display: flex;
+    margin: 10px;
 }
 
 #iv-prompt-text {
@@ -264,16 +281,22 @@ h1#mc_question {
 #prompt {
     margin: 10px;
     resize: none;
-    align-self: center;
     height: 80px;
     width: 250px;
 }
 
-.iv-answers-setup {
-    position: fixed;
-    top: 260px;
-    left: 100px;
+.iv-multiple-choice-section {
+    position: relative;
     background-color: goldenrod;
+    margin: 10px;
+    display: flex;
+}
+
+.iv-answers-setup {
+    position: relative;
+    margin: 10px;
+    width: 370px;
+    background-color: green;
 }
 
 .iv-number-of-answers {
@@ -322,7 +345,7 @@ h1#mc_question {
 
 .iv-correct-answer {
     position: relative;
-    background-color: green;
+    background-color: maroon;
     margin: 10px;
     display: flex;
 }
@@ -339,6 +362,1378 @@ h1#mc_question {
     margin-right: 10px;
     align-self: center;
     height: 30px;
+}
+
+.iv-list-of-answers {
+    position: relative;
+    background-color: green;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-answer-list-text {
+    height: 25px;
+    width: 100px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.iv-answer-list-A {
+    position: relative;
+    background-color: maroon;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+}
+
+#iv-answer-list-A-text {
+    height: 25px;
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#answer-A {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-answer-list-B {
+    position: relative;
+    background-color: maroon;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+#iv-answer-list-B-text {
+    height: 25px;
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#answer-B {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-answer-list-C {
+    position: relative;
+    background-color: maroon;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+}
+
+#iv-answer-list-C-text {
+    height: 25px;
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#answer-C {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-answer-list-D {
+    position: relative;
+    background-color: maroon;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+#iv-answer-list-D-text {
+    height: 25px;
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#answer-D {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-answer-list-E {
+    position: relative;
+    background-color: maroon;
+    margin-left: 10px;
+    margin-top: 10px;
+    Margin-bottom: 10px;
+    display: flex;
+}
+
+#iv-answer-list-E-text {
+    height: 25px;
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#answer-E {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-answer-list-F {
+    position: relative;
+    background-color: maroon;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    Margin-bottom: 10px;
+    display: flex;
+}
+
+#iv-answer-list-F-text {
+    height: 25px;
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#answer-F {
+    margin: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.format-view-answers-A-C-E {
+    position: relative;
+    margin-left: 3px;
+}
+
+.format-view-answers-B-D-F {
+    position: relative;
+    margin-left: 3px;
+}
+
+.iv-definition-matching {
+    position: relative;
+    background-color: palevioletred;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-dm-number-of-definitions {
+    position: relative;
+    width: 370px;
+    background-color: lightseagreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-number-of-definitions-text {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 25px;
+    width: 250px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-number-of-definitions-decrease {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#iv-dm-number-of-definitions-value {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: white;
+    text-align: center;
+    line-height: 30px;
+    color: black;
+}
+
+#iv-dm-number-of-definitions-increase {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.iv-dm-definition-list {
+    position: relative;
+    background-color: lightseagreen;
+    margin: 10px;
+}
+
+.iv-dm-definition-A {
+    position: relative;
+    background-color: rgb(240, 68, 68);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-term-A-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-A {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-dm-term-A-definition-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-A-definition {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-dm-definition-B {
+    position: relative;
+    background-color: rgb(240, 68, 68);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-term-B-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-B {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-dm-term-B-definition-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-B-definition {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-dm-definition-C {
+    position: relative;
+    background-color: rgb(240, 68, 68);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-term-C-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-C {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-dm-term-C-definition-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-C-definition {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-dm-definition-D {
+    position: relative;
+    background-color: rgb(240, 68, 68);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-term-D-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-D {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-dm-term-D-definition-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-D-definition {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-dm-definition-E {
+    position: relative;
+    background-color: rgb(240, 68, 68);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-term-E-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-E {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-dm-term-E-definition-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-E-definition {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-dm-definition-F {
+    position: relative;
+    background-color: rgb(240, 68, 68);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-dm-term-F-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-F {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-dm-term-F-definition-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-dm-term-F-definition {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-math-question {
+    position: relative;
+    background-color: mediumseagreen;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-mq-number-of-variables {
+    position: relative;
+    width: 370px;
+    background-color: coral;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-mq-number-of-variables-text {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 25px;
+    width: 250px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-number-of-variables-decrease {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#iv-mq-number-of-variables-value {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: white;
+    text-align: center;
+    line-height: 30px;
+    color: black;
+}
+
+#iv-mq-number-of-variables-increase {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.iv-mq-variable-solution-list {
+    position: relative;
+    background-color: coral;
+    margin: 10px;
+}
+
+.iv-mq-variable-solution-A {
+    position: relative;
+    background-color: plum;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-mq-variable-A-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-variable-A {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-mq-solution-A-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-solution-A {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-mq-variable-solution-B {
+    position: relative;
+    background-color: plum;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-mq-variable-B-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-variable-B {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-mq-solution-B-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-solution-B {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-mq-variable-solution-C {
+    position: relative;
+    background-color: plum;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-mq-variable-C-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 80px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-variable-C {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+#iv-mq-solution-C-text {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 120px; /* Increased width */
+    align-self: center;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-mq-solution-C {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    align-self: center;
+    height: 40px;
+    width: 120px;
+}
+
+.iv-select-all-that-apply {
+    position: relative;
+    background-color: steelblue;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-sa-num-answers-num-correct-list-of-correct {
+    position: relative;
+    width: 370px;
+    background-color: orchid;
+    margin: 10px;
+}
+
+.iv-sa-number-of-answers {
+    position: relative;
+    background-color: springgreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-number-of-answers-text {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 25px;
+    width: 250px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-sa-number-of-answers-decrease {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#iv-sa-number-of-answers-value {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: white;
+    text-align: center;
+    line-height: 30px;
+    color: black;
+}
+
+#iv-sa-number-of-answers-increase {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.iv-sa-number-of-correct-answers {
+    position: relative;
+    background-color: springgreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-number-of-correct-answers-text {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 50px;
+    width: 250px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#iv-sa-number-of-correct-answers-decrease {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#iv-sa-number-of-correct-answers-value {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    background-color: white;
+    text-align: center;
+    line-height: 30px;
+    color: black;
+}
+
+#iv-sa-number-of-correct-answers-increase {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.iv-sa-correct-answers-list {
+    position: relative;
+    background-color: springgreen;
+    margin: 10px;
+    display: flex;
+    flex-flow: column;
+}
+
+#iv-sa-correct-answers-list-text {
+    position: relative;
+    margin-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    height: 25px;
+    width: 180px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.iv-sa-format-correct-answers-1-2-3 {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.iv-sa-correct-answer-1 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#iv-sa-correct-answer-1-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-1-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-correct-answer-2 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#iv-sa-correct-answer-2-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-2-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-correct-answer-3 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-correct-answer-3-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-3-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-format-correct-answers-4-5-6 {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.iv-sa-correct-answer-4 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#iv-sa-correct-answer-4-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-4-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-correct-answer-5 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#iv-sa-correct-answer-5-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-5-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-correct-answer-6 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-correct-answer-6-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-6-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-format-correct-answers-7-8 {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.iv-sa-correct-answer-7 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#iv-sa-correct-answer-7-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-7-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-correct-answer-8 {
+    position: relative;
+    background-color: rgb(125, 126, 123);
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-correct-answer-8-text {
+    width: 30px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#iv-sa-correct-answer-8-selection {
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+    height: 30px;
+}
+
+.iv-sa-answers-list {
+    position: relative;
+    background-color: orchid;
+    /*display: flex;*/
+    margin: 10px;
+}
+
+#iv-sa-answer-list-text {
+    width: 100px; /* Increased width */
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px;
+}
+
+.iv-sa-format-answer-A-B {
+    position: relative;
+    background-color: springgreen;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-sa-answer-A {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-A-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-A {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-answer-B {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-B-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-B {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-format-answer-C-D {
+    position: relative;
+    background-color: springgreen;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-sa-answer-C {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-C-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-C {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-answer-D {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-D-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-D {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-format-answer-E-F {
+    position: relative;
+    background-color: springgreen;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-sa-answer-E {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-E-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-E {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-answer-F {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-F-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-F {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-format-answer-G-H {
+    position: relative;
+    background-color: springgreen;
+    display: flex;
+    margin: 10px;
+}
+
+.iv-sa-answer-G {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-G-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-G {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.iv-sa-answer-H {
+    position: relative;
+    background-color: darkolivegreen;
+    display: flex;
+    margin: 10px;
+}
+
+#iv-sa-answer-H-text {
+    width: 30px; /* Increased width */
+    height: 30px;
+    background-color: #333;
+    border-radius: 8px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#iv-sa-answer-H {
+    margin: 10px;
+    resize: none;
+    height: 80px;
+    width: 165px;
+}
+
+.submit-to-database {
+    position: fixed;
+    top: 610px;
+    left: 10px;
+    padding: 10px 15px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.submit-to-database:hover {
+    background-color: #777;
 }
 
 /* Reusing the same styles for input-group, label, input, and button from the login page */

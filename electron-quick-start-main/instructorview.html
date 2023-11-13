@@ -13,43 +13,332 @@
         <!-- Return to Menu button -->
         <button id="return_to_menu" class="menu-button">Return to Menu</button>
         
-        <div class="iv-question-type">
-            <h3 id="iv-question-type-text">Select Question Type: </h3>
-            <select name="question-type-selection" id="question-type-selection">
-                <option value="multiplechoice">Multiple choice</option>
-                <option value="definintionmatching">Definition matching</option>
-                <option value="visualdiagram">Visual diagram</option>
-                <option value="mathquestion">Math Question</option>
-                <option value="checkallthatapply">Check all that apply</option>
-            </select>
-        </div>
+        <div class="iv-body">
+            <div class="iv-general-all">
+                <div class="iv-question-type">
+                    <h3 id="iv-question-type-text">Select Question Type: </h3>
+                    <select name="question-type-selection" id="question-type-selection">
+                        <option value="multiplechoice">Multiple choice</option>
+                        <option value="definintionmatching">Definition matching</option>
+                        <option value="mathquestion">Math Question</option>
+                        <option value="checkallthatapply">Check all that apply</option>
+                    </select>
+                </div>
 
-        <div class="iv-question-prompt">
-            <h3 id="iv-prompt-text">Question Prompt: </h3>
-            <textarea id="prompt" name="prompt"></textarea>
-        </div>
-
-        <div class="iv-answers-setup">
-            <div class="iv-number-of-answers">
-                <h3 id="iv-number-of-answers-text">Number of Answers: </h3>
-                <button id="decrease" class="number_of_answers">-</button>
-                <p type="text" id="num_answers" name="num_answers">4</p>
-                <button id="increase" class="number_of_answers">+</button>
+                <div class="iv-question-prompt">
+                    <h3 id="iv-prompt-text">Question Prompt: </h3>
+                    <textarea id="prompt" name="prompt"></textarea>
+                </div>
             </div>
 
-            <div class="iv-correct-answer">
-                <h3 id="correct-answer-text">Select Correct Answer: </h3>
-                <select name="correct-answer-selection" id="correct-answer-selection">
-                    <option value="answer_A">A</option>
-                    <option value="answer_B">B</option>
-                    <option value="answer_C">C</option>
-                    <option value="answer_D">D</option>
-                    <option value="answer_E">E</option>
-                </select>
+            <div class="iv-multiple-choice-section">
+                <div class="iv-answers-setup">
+                    <div class="iv-number-of-answers">
+                        <h3 id="iv-number-of-answers-text">Number of Answers: </h3>
+                        <button id="decrease" class="number_of_answers">-</button>
+                        <p type="text" id="num_answers" name="num_answers">4</p>
+                        <button id="increase" class="number_of_answers">+</button>
+                    </div>
+
+                    <div class="iv-correct-answer">
+                        <h3 id="correct-answer-text">Select Correct Answer: </h3>
+                        <select name="correct-answer-selection" id="correct-answer-selection">
+                            <option value="answer_A">A</option>
+                            <option value="answer_B">B</option>
+                            <option value="answer_C">C</option>
+                            <option value="answer_D">D</option>
+                            <option value="answer_E">E</option>
+                            <option value="answer_F">F</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="iv-list-of-answers">
+                    <h3 id="iv-answer-list-text">Answers: </h3>
+                    <div class="format-view-answers-A-C-E">
+                        <div class="iv-answer-list-A">
+                            <h3 id="iv-answer-list-A-text">A: </h3>
+                            <textarea id="answer-A" name="answer-A"></textarea>
+                        </div>
+                        <div  class="iv-answer-list-C">
+                            <h3 id="iv-answer-list-C-text">C: </h3>
+                            <textarea id="answer-C" name="answer-C"></textarea>
+                        </div>
+                        <div class="iv-answer-list-E">
+                            <h3 id="iv-answer-list-E-text">E: </h3>
+                            <textarea id="answer-E" name="answer-E"></textarea>
+                        </div>
+                    </div>
+                    <div class="format-view-answers-B-D-F">
+                        <div class="iv-answer-list-B">
+                            <h3 id="iv-answer-list-B-text">B: </h3>
+                            <textarea id="answer-B" name="answer-B"></textarea>
+                        </div>
+                        <div  class="iv-answer-list-D">
+                            <h3 id="iv-answer-list-D-text">D: </h3>
+                            <textarea id="answer-D" name="answer-D"></textarea>
+                        </div>
+                        <div class="iv-answer-list-F">
+                            <h3 id="iv-answer-list-F-text">F: </h3>
+                            <textarea id="answer-F" name="answer-F"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="iv-definition-matching">
+                <div class="iv-dm-number-of-definitions">
+                    <h3 id="iv-dm-number-of-definitions-text">Number of Definitions: </h3>
+                    <button id="iv-dm-number-of-definitions-decrease" class="iv-dm-number-of-definitions-decrease">-</button>
+                    <p type="text" id="iv-dm-number-of-definitions-value" name="iv-dm-number-of-definitions-value">4</p>
+                    <button id="iv-dm-number-of-definitions-increase" class="iv-dm-number-of-definitions-increase">+</button>
+                </div>
+                <div class="iv-dm-definition-list">
+                    <div class="iv-dm-definition-A">
+                        <h3 id="iv-dm-term-A-text">Term A: </h3>
+                        <textarea id="iv-dm-term-A" name="iv-dm-term-A"></textarea>
+                        <h3 id="iv-dm-term-A-definition-text">Definition A: </h3>
+                        <textarea id="iv-dm-term-A-definition" name="iv-dm-term-A-definition"></textarea>
+                    </div>
+                    <div class="iv-dm-definition-B">
+                        <h3 id="iv-dm-term-B-text">Term B: </h3>
+                        <textarea id="iv-dm-term-B" name="iv-dm-term-B"></textarea>
+                        <h3 id="iv-dm-term-B-definition-text">Definition B: </h3>
+                        <textarea id="iv-dm-term-B-definition" name="iv-dm-term-B-definition"></textarea>
+                    </div>
+                    <div class="iv-dm-definition-C">
+                        <h3 id="iv-dm-term-C-text">Term C: </h3>
+                        <textarea id="iv-dm-term-C" name="iv-dm-term-C"></textarea>
+                        <h3 id="iv-dm-term-C-definition-text">Definition C: </h3>
+                        <textarea id="iv-dm-term-C-definition" name="iv-dm-term-C-definition"></textarea>
+                    </div>
+                    <div class="iv-dm-definition-D">
+                        <h3 id="iv-dm-term-D-text">Term D: </h3>
+                        <textarea id="iv-dm-term-D" name="iv-dm-term-D"></textarea>
+                        <h3 id="iv-dm-term-D-definition-text">Definition D: </h3>
+                        <textarea id="iv-dm-term-D-definition" name="iv-dm-term-D-definition"></textarea>
+                    </div>
+                    <div class="iv-dm-definition-E">
+                        <h3 id="iv-dm-term-E-text">Term E: </h3>
+                        <textarea id="iv-dm-term-E" name="iv-dm-term-E"></textarea>
+                        <h3 id="iv-dm-term-E-definition-text">Definition E: </h3>
+                        <textarea id="iv-dm-term-E-definition" name="iv-dm-term-E-definition"></textarea>
+                    </div>
+                    <div class="iv-dm-definition-F">
+                        <h3 id="iv-dm-term-F-text">Term F: </h3>
+                        <textarea id="iv-dm-term-F" name="iv-dm-term-F"></textarea>
+                        <h3 id="iv-dm-term-F-definition-text">Definition F: </h3>
+                        <textarea id="iv-dm-term-F-definition" name="iv-dm-term-F-definition"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="iv-math-question">
+                <div class="iv-mq-number-of-variables">
+                    <h3 id="iv-mq-number-of-variables-text">Number of variables: </h3>
+                    <button id="iv-mq-number-of-variables-decrease" class="iv-mq-number-of-variables-decrease">-</button>
+                    <p type="text" id="iv-mq-number-of-variables-value" name="iv-mq-number-of-variables-value">1</p>
+                    <button id="iv-mq-number-of-variables-increase" class="iv-mq-number-of-variables-increase">+</button>
+                </div>
+                <div class="iv-mq-variable-solution-list">
+                    <div class="iv-mq-variable-solution-A">
+                        <h3 id="iv-mq-variable-A-text">Variable Name: </h3>
+                        <textarea id="iv-mq-variable-A" name="iv-mq-variable-A"></textarea>
+                        <h3 id="iv-mq-solution-A-text">Solution: </h3>
+                        <textarea id="iv-mq-solution-A" name="iv-mq-solution-A"></textarea>
+                    </div>
+                    <div class="iv-mq-variable-solution-B">
+                        <h3 id="iv-mq-variable-B-text">Variable Name: </h3>
+                        <textarea id="iv-mq-variable-B" name="iv-mq-variable-B"></textarea>
+                        <h3 id="iv-mq-solution-B-text">Solution: </h3>
+                        <textarea id="iv-mq-solution-B" name="iv-mq-solution-B"></textarea>
+                    </div>
+                    <div class="iv-mq-variable-solution-C">
+                        <h3 id="iv-mq-variable-C-text">Variable Name: </h3>
+                        <textarea id="iv-mq-variable-C" name="iv-mq-variable-C"></textarea>
+                        <h3 id="iv-mq-solution-C-text">Solution: </h3>
+                        <textarea id="iv-mq-solution-C" name="iv-mq-solution-C"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="iv-select-all-that-apply">
+                <div class="iv-sa-num-answers-num-correct-list-of-correct">
+                    <div class="iv-sa-number-of-answers">
+                        <h3 id="iv-sa-number-of-answers-text">Number of Answers: </h3>
+                        <button id="iv-sa-number-of-answers-decrease" class="iv-sa-number-of-answers-decrease">-</button>
+                        <p type="text" id="iv-sa-number-of-answers-value" name="iv-sa-number-of-answers-value">4</p>
+                        <button id="iv-sa-number-of-answers-increase" class="iv-sa-number-of-answers-increase">+</button>
+                    </div>
+                    <div class="iv-sa-number-of-correct-answers">
+                        <h3 id="iv-sa-number-of-correct-answers-text">Number of Correct Answers: </h3>
+                        <button id="iv-sa-number-of-correct-answers-decrease" class="iv-sa-number-of-correct-answers-decrease">-</button>
+                        <p type="text" id="iv-sa-number-of-correct-answers-value" name="iv-sa-number-of-correct-answers-value">4</p>
+                        <button id="iv-sa-number-of-correct-answers-increase" class="iv-sa-number-of-correct-answers-increase">+</button>
+                    </div>
+                    <div class="iv-sa-correct-answers-list">
+                        <h3 id="iv-sa-correct-answers-list-text">Correct Answers: </h3>
+                        <div class="iv-sa-format-correct-answers-1-2-3">
+                            <div class="iv-sa-correct-answer-1">
+                                <h3 id="iv-sa-correct-answer-1-text">1: </h3>
+                                <select name="iv-sa-correct-answer-1-selection" id="iv-sa-correct-answer-1-selection">
+                                    <option value="iv-sa-correct-answer-1-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-1-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-1-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-1-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-1-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-1-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-1-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-1-option-H">H</option>
+                                </select>
+                            </div>
+                            <div class="iv-sa-correct-answer-2">
+                                <h3 id="iv-sa-correct-answer-2-text">2: </h3>
+                                <select name="iv-sa-correct-answer-2-selection" id="iv-sa-correct-answer-2-selection">
+                                    <option value="iv-sa-correct-answer-2-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-2-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-2-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-2-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-2-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-2-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-2-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-2-option-H">H</option>
+                                </select>
+                            </div>
+                            <div class="iv-sa-correct-answer-3">
+                                <h3 id="iv-sa-correct-answer-3-text">3: </h3>
+                                <select name="iv-sa-correct-answer-3-selection" id="iv-sa-correct-answer-3-selection">
+                                    <option value="iv-sa-correct-answer-3-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-3-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-3-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-3-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-3-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-3-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-3-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-3-option-H">H</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="iv-sa-format-correct-answers-4-5-6">
+                            <div class="iv-sa-correct-answer-4">
+                                <h3 id="iv-sa-correct-answer-4-text">4: </h3>
+                                <select name="iv-sa-correct-answer-4-selection" id="iv-sa-correct-answer-4-selection">
+                                    <option value="iv-sa-correct-answer-4-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-4-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-4-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-4-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-4-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-4-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-4-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-4-option-H">H</option>
+                                </select>
+                            </div>
+                            <div class="iv-sa-correct-answer-5">
+                                <h3 id="iv-sa-correct-answer-5-text">5: </h3>
+                                <select name="iv-sa-correct-answer-5-selection" id="iv-sa-correct-answer-5-selection">
+                                    <option value="iv-sa-correct-answer-5-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-5-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-5-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-5-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-5-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-5-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-5-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-5-option-H">H</option>
+                                </select>
+                            </div>
+                            <div class="iv-sa-correct-answer-6">
+                                <h3 id="iv-sa-correct-answer-6-text">6: </h3>
+                                <select name="iv-sa-correct-answer-6-selection" id="iv-sa-correct-answer-6-selection">
+                                    <option value="iv-sa-correct-answer-6-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-6-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-6-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-6-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-6-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-6-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-6-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-6-option-H">H</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="iv-sa-format-correct-answers-7-8">
+                            <div class="iv-sa-correct-answer-7">
+                                <h3 id="iv-sa-correct-answer-7-text">7: </h3>
+                                <select name="iv-sa-correct-answer-7-selection" id="iv-sa-correct-answer-7-selection">
+                                    <option value="iv-sa-correct-answer-7-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-7-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-7-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-7-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-7-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-7-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-7-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-7-option-H">H</option>
+                                </select>
+                            </div>
+                            <div class="iv-sa-correct-answer-8">
+                                <h3 id="iv-sa-correct-answer-8-text">8: </h3>
+                                <select name="iv-sa-correct-answer-8-selection" id="iv-sa-correct-answer-8-selection">
+                                    <option value="iv-sa-correct-answer-8-option-A">A</option>
+                                    <option value="iv-sa-correct-answer-8-option-B">B</option>
+                                    <option value="iv-sa-correct-answer-8-option-C">C</option>
+                                    <option value="iv-sa-correct-answer-8-option-D">D</option>
+                                    <option value="iv-sa-correct-answer-8-option-E">E</option>
+                                    <option value="iv-sa-correct-answer-8-option-F">F</option>
+                                    <option value="iv-sa-correct-answer-8-option-G">G</option>
+                                    <option value="iv-sa-correct-answer-8-option-H">H</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="iv-sa-answers-list">
+                    <h3 id="iv-sa-answer-list-text">Answers: </h3>
+                    <div class="iv-sa-format-answer-A-B">
+                        <div class="iv-sa-answer-A">
+                            <h3 id="iv-sa-answer-A-text">A: </h3>
+                            <textarea id="iv-sa-answer-A" name="iv-sa-answer-A"></textarea>
+                        </div>
+                        <div class="iv-sa-answer-B">
+                            <h3 id="iv-sa-answer-B-text">B: </h3>
+                            <textarea id="iv-sa-answer-B" name="iv-sa-answer-B"></textarea>
+                        </div>
+                    </div>
+                    <div class="iv-sa-format-answer-C-D">
+                        <div class="iv-sa-answer-C">
+                            <h3 id="iv-sa-answer-C-text">C: </h3>
+                            <textarea id="iv-sa-answer-C" name="iv-sa-answer-C"></textarea>
+                        </div>
+                        <div class="iv-sa-answer-D">
+                            <h3 id="iv-sa-answer-A-text">D: </h3>
+                            <textarea id="iv-sa-answer-D" name="iv-sa-answer-D"></textarea>
+                        </div>
+                    </div>
+                    <div class="iv-sa-format-answer-E-F">
+                        <div class="iv-sa-answer-E">
+                            <h3 id="iv-sa-answer-E-text">E: </h3>
+                            <textarea id="iv-sa-answer-E" name="iv-sa-answer-E"></textarea>
+                        </div>
+                        <div class="iv-sa-answer-F">
+                            <h3 id="iv-sa-answer-F-text">F: </h3>
+                            <textarea id="iv-sa-answer-F" name="iv-sa-answer-F"></textarea>
+                        </div>
+                    </div>
+                    <div class="iv-sa-format-answer-G-H">
+                        <div class="iv-sa-answer-G">
+                            <h3 id="iv-sa-answer-G-text">G: </h3>
+                            <textarea id="iv-sa-answer-G" name="iv-sa-answer-G"></textarea>
+                        </div>
+                        <div class="iv-sa-answer-H">
+                            <h3 id="iv-sa-answer-H-text">H: </h3>
+                            <textarea id="iv-sa-answer-H" name="iv-sa-answer-H"></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        
+        <!-- Submit to Database button -->
+        <button id="submit-to-database" class="submit-to-database">Submit</button>
     </div>
 </body>
 </html>
