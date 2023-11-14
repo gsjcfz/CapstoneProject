@@ -33,22 +33,100 @@ async function get_question(QUESTION){
   }
   return result;
   }
-  
+
 //Get All Questions from a PACK
-async function get_all_questions(PACK){
-  const result = await db.query(
-  `SELECT *
-  FROM \`ANSWER\` AS \`A\` INNER JOIN 
-    (\`PROMPT\` AS \`P\` INNER JOIN \`QUESTION\` AS \`Q\`
-    ON \`P\`.\`question_ID\` = \`Q\`.\`ID\`)
-  ON \`A\`.\`prompt_ID\` = \`P\`.\`ID\`
-  WHERE \`Q\`.\`pack_ID\` = ${PACK.ID}`
+async function get_all_questions(PACKID){
+  const data = await db.query(
+    `SELECT \`Q\`.\`ID\` AS \`QID\`,\`Q\`.\`type\`, \`Q\`.\`level\`, \`Q\`.\`point_value\`, \`Q\`.\`image\` AS \`Qimage\`, \`Q\`.\`pack_ID\`,
+    \`P\`.\`ID\` AS \`PID\`, \`P\`.\`text\` AS \`Ptext\`, \`P\`.\`image\` AS \`Pimage\`, \`P\`.\`question_ID\`,
+    \`A\`.\`ID\` AS \`AID\`, \`A\`.\`text\` AS \`Atext\`, \`A\`.\`correct\`, \`A\`.\`image\` AS \`Aimage\`, \`A\`.\`prompt_ID\`
+    FROM \`QUESTION\` AS \`Q\` INNER JOIN \`PROMPT\` AS \`P\`
+        ON \`P\`.\`question_ID\` = \`Q\`.\`ID\`
+	    INNER JOIN \`ANSWER\` AS \`A\`
+	      ON \`A\`.\`prompt_ID\` = \`P\`.\`ID\`
+    WHERE \`Q\`.\`pack_ID\` = 1
+    ORDER BY \`LEVEL\`, \`Q\`.\`ID\`, \`P\`.\`ID\`, \`A\`.\`ID\`;`
   );
-  if (!result){
-    result = [];
+
+  // ordered loop is question.prompt.answer
+  let ordered_data = []
+
+  let current_q = {};
+  let current_p = {};
+  let current_a = {};
+  // iterate over data
+  for (let i = 0; i < data.length; i++) {
+    console.log(i, current_q, current_p);
+
+    // if theres a current question but it doesnt match incoming tuple
+    //  then push current_q to ordered_data and clear current_q
+    if (Object.keys(current_q).length != 0) {
+      if (current_q.ID != data[i].QID) {
+        current_q.prompt.push(current_p);
+        ordered_data.push(current_q);
+        current_q = {};
+        current_p = {};
+      }
+    }
+    // if theres no current question
+    //  then fill current_q with incoming tuple
+    if (Object.keys(current_q).length === 0) {
+      current_q = {
+        ID: data[i].QID,
+        type: data[i].type,
+        level: data[i].level,
+        point_value: data[i].point_value,
+        image: data[i].Qimage,
+        pack_ID: data[i].pack_ID,
+        prompt: []
+      }
+    }
+    // there is a current question and it matches the incoming tuple
+
+    // if theres a current prompt but it doesnt match the incoming tuple
+    //  then push current_p to current_q.prompts and clear current_p
+    if (Object.keys(current_p).length != 0) {
+      if (current_p.ID != data[i].PID) {
+        current_q.prompt.push(current_p);
+        current_p = {};
+      }
+    }
+    // if theres no current prompt,
+    //  then fill current_p with incoming tuple
+    if (Object.keys(current_p).length === 0) {
+      current_p = {
+        ID: data[i].PID,
+        text: data[i].Ptext,
+        image: data[i].Pimage,
+        question_ID: data[i].question_ID,
+        answer: []
+      }
+    }
+    // theres a prompt and it matches the incoming tuple
+
+    // always fill, push, and clear current_a
+    current_a = {
+      ID: data[i].AID,
+      text: data[i].Atext,
+      correct: data[i].correct,
+      image: data[i].Aimage,
+      prompt_ID: data[i].prompt_ID
+    }
+    current_p.answer.push(current_a);
+    current_a = {};
   }
-  return result
+
+  current_q.prompt.push(current_p);
+  ordered_data.push(current_q);
+
+  if (!ordered_data){
+    ordered_data = [];
   }
+
+  console.log(ordered_data);
+  return ordered_data;
+}
+
 
   module.exports = {
     create_question,
