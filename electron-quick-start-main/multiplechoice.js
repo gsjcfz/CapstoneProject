@@ -35,5 +35,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 });
 document.getElementById('return_to_menu').addEventListener('click', () => {
-    window.myAPI.send('back-to-menu');
+    window.myAPI.send('navigate', 'main_menu');
 });

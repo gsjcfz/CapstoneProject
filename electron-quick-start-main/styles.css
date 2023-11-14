@@ -55,6 +55,56 @@ body {
     color: #eee;
 }
 
+.skeleton {
+    animation: skeleton-loading 1s ease-in-out infinite alternate;
+}
+  
+@keyframes skeleton-loading {
+    0% {
+        background-color: #555;
+    }
+    100% {
+        background-color: #888;
+    }
+}
+
+.skeleton-pack {
+    padding: 20px;
+    width: 300px;
+    height: 75px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    cursor: default;
+    text-align: left;
+}
+
+.pack-container {
+    background-color: #333;
+    padding: 50px;
+    padding-top: 20px;
+    align-self: baseline;
+    margin-top: 50px;
+    border-radius: 10px;
+    font-size: 22px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.pack {
+    padding: 20px;
+    width: 300px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    text-align: left;
+}
+
 .quiz-container {
     background-color: #333;
     padding: 30px;
@@ -144,6 +194,21 @@ h1#mc_question {
 }
 
 .progress {
+    background-color: #007BFF;
+    height: 100%;
+    width: 0%; /* Initially empty */
+}
+
+.pack-progress-bar {
+    background-color: #444;
+    border-radius: 5px;
+    margin-top: 5px;
+    height: 20px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pack-progress {
     background-color: #007BFF;
     height: 100%;
     width: 0%; /* Initially empty */

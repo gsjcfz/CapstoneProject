@@ -1,7 +1,7 @@
 const db = require('./db');
 
-async function user_exists(user_id) {
-    const sql_query = `SELECT 1 FROM \`USER\` WHERE \`ID\`=${user_id};`;
+async function user_exists(username) {
+    const sql_query = `SELECT 1 FROM \`USER\` WHERE \`name\`='${username}';`;
     const row = await db.query(sql_query);
     if (row[0]) {return true;}
     else {return false;}
@@ -17,7 +17,7 @@ async function pack_exists(pack_id) {
 async function getPackLeaderboard(pack_id) {
     // This makes constructing `query` easier    
     const sql_query = `
-SELECT \`user_ID\`, \`package_score\`
+SELECT \`username\`, \`package_score\`
 FROM \`USER_SCORE\`
 WHERE \`pack_ID\`=${pack_id}
 ORDER BY \`pack_score\` DESC
@@ -31,17 +31,17 @@ LIMIT 10;
     return result;
 }
 
-async function getPlayerScore(pack_id, user_id) {
+async function getPlayerScore(pack_id, username) {
     const sql_query = `
 SELECT \`pack_score\`
 FROM \`USER_SCORE\`
 WHERE \`pack_ID\`=${pack_id}
-AND \`user_ID\`=${user_id}
+AND \`username\`='${username}'
 LIMIT 1;
 `   ;
     const rows = await db.query(sql_query);
     let result = {
-        user_ID: user_id,
+        username: username,
         pack_ID: pack_id,
         score: -1,
     };
@@ -52,19 +52,19 @@ LIMIT 1;
     return result;
 }
 
-async function setPlayerScore(pack_id, user_id, score) {
+async function setPlayerScore(pack_id, username, score) {
     const sql_query = `
-INSERT INTO \`USER_SCORE\` (\`pack_ID\`, \`user_ID\`, \`pack_score\`)
-VALUES (${pack_id}, ${user_id}, ${score})
+INSERT INTO \`USER_SCORE\` (\`pack_ID\`, \`username\`, \`pack_score\`)
+VALUES (${pack_id}, '${username}', ${score})
 ON DUPLICATE KEY UPDATE \`pack_score\`=${score};
 `   ;
     let result = {
-        user_ID: user_id,
+        username: username,
         pack_ID: pack_id,
         score: -1,
     };
     if (
-        await user_exists(user_id) &&
+        await user_exists(username) &&
         await pack_exists(pack_id)
     ) {
         const rows = await db.query(sql_query);
