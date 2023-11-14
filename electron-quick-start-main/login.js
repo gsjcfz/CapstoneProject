@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     form.addEventListener('submit', async function(e) {
+        let login_btn = document.getElementById("login-btn");
         e.preventDefault();
         login_btn.textContent = 'Logging In...';
         login_btn.disabled = true;
