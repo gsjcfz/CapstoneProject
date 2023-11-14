@@ -51,8 +51,12 @@ ipcMain.on('navigate', (event, page) => {
             case 'settings':
                 mainWindow.loadFile('settings.html');
                 break;
+            case 'instructor-view':
+                mainWindow.loadFile('instructorview.html');
+                break;
             case 'main_menu':
                 mainWindow.loadFile('main_menu.html');
+                break;
             default:
                 console.error(`Unknown navigation target: ${page}`);
                 break;
