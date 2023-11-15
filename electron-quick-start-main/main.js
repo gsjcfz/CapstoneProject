@@ -5,8 +5,8 @@ let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 900,
+        height: 700,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true
@@ -42,6 +42,9 @@ ipcMain.on('navigate', (event, page) => {
     if (mainWindow) {
         // Here we just load a different file based on the 'page' argument
         switch(page) {
+            case 'launch':
+                mainWindow.loadFile('addquestion.html');
+                break;
             case 'main':
                 mainWindow.loadFile('index.html');
                 break;
@@ -53,6 +56,13 @@ ipcMain.on('navigate', (event, page) => {
                 break;
             case 'main_menu':
                 mainWindow.loadFile('main_menu.html');
+                break;
+            case 'register':
+                mainWindow.loadFile('register.html');
+                break;
+            case 'login':
+                mainWindow.loadFile('login.html')
+                break;
             default:
                 console.error(`Unknown navigation target: ${page}`);
                 break;

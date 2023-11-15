@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok && result.success) {
                 // Store the access token in local storage
                 localStorage.setItem('accessToken', result.token);
-
+                localStorage.setItem('username', username);
                 // Use IPC to tell the main process to navigate to the main menu
                 window.myAPI.send('navigate', 'main_menu');
             } else {
