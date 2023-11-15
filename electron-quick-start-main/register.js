@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('register-form');
-
+    document.getElementById('back').addEventListener('click', () => {
+        window.myAPI.send('navigate', 'main');
+    });
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
 

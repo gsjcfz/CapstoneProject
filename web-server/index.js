@@ -8,6 +8,7 @@ const leaderboard_router = require("./routes/leaderboard");
 const score_router = require("./routes/playerscore");
 const userRouter = require("./routes/user");
 const loginRouter = require("./routes/login");
+const question_router = require("./routes/question");
 
 const app = express();
 const port = 3000;
@@ -28,6 +29,7 @@ app.listen(port, () => {
 
 app.use("/example", mycrypt.authenticateToken, example_router);
 app.use("/pack", mycrypt.authenticateToken, packRouter);
+app.use("/question", question_router);
 app.use("/leaderboard", mycrypt.authenticateToken, leaderboard_router);
 app.use("/playerscore", mycrypt.authenticateToken, score_router);
 

@@ -12,6 +12,16 @@ router.get('/', async function(req, res, next) {
   }
 });
 
+/* GET list of packs with creator info */
+router.get('/user', async function(req, res, next) {
+  try {
+    res.json(await pack.listPacksScores(req.auth_username));
+  } catch (err) {
+    console.error(`Error while getting packs: `, err.message);
+    next(err);
+  }
+});
+
 /* POST a new pack */
 router.post('/', async function(req, res, next) {
   try {
