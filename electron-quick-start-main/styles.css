@@ -132,6 +132,12 @@ h1#mc_question {
     row-gap: 10px;
 }
 
+.match_list {
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 10px;
+}
+
 .mc_option, .match_item {
     padding: 20px;
     background-color: #555;
