@@ -64,7 +64,7 @@ async function sendFinalScore(score) {
     loadingResults.style.display = 'block'; // Show loading message
 
     try {
-        const response = await fetch('http://localhost:3000/playerscores', {
+        const response = await fetch('http://localhost:3000/playerscore', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,8 +76,14 @@ async function sendFinalScore(score) {
                 score: score
             })
         });
-        const data = await response.json();
-        console.log('Score update response:', data);
+
+        if (response.headers.get('Content-Type').includes('text/html')) {
+            const htmlResponse = await response.text();
+            console.log('HTML response:', htmlResponse);
+            // Process the HTML response as needed
+        } else {
+            console.error('Unexpected response type');
+        }
     } catch (error) {
         console.error('Error updating score:', error);
         alert(`An error occurred: ${error.message}`);
@@ -85,6 +91,7 @@ async function sendFinalScore(score) {
         loadingResults.style.display = 'none'; // Hide loading message
     }
 }
+
 
 function loadNextQuestion() {
     currentQuestionIndex++;
