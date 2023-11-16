@@ -13,6 +13,15 @@ router.post('/', async function(req, res, next) {
     }
   });
 
+router.post('/many', async function(req, res, next) {
+  try {
+    res.json(await question_mod.create_questions(req.body));
+  } catch (err) {
+    console.error(`Error while creating multiple questions`, err);
+    next(err);
+  }
+});
+
   router.get('/', async function(req, res, next) {
     try {
       res.json(await question_mod.get_question(req.query.pack, req.query.question));

@@ -20,6 +20,53 @@ async function create_question(QUESTION){
     return {message};
   }
 
+async function create_questions(data) {
+  let final_query = "";
+  const qid_var = "@qid";
+  const pid_var = "@pid";
+  for (let i = 0; i < data.data.length; i++) {
+    final_query = final_query.concat(`\nINSERT INTO \`QUESTION\` (\`type\`, \`point_value\`, \`pack_ID\`) VALUES`);
+    current_q = data.data[i];
+
+    // Add the question to the final query
+    final_query = final_query.concat(`\n("${current_q.type}", ${current_q.point_value}, ${current_q.pack_ID});`);
+    // Set the variable for the question ID
+    final_query = final_query.concat(`\nSET ${qid_var} := LAST_INSERT_ID();`);
+
+    for (let j = 0; j < current_q.prompt.length; j++) {
+      final_query = final_query.concat(`\nINSERT INTO \`PROMPT\` (\`text\`, \`question_ID\`) VALUES`);
+      current_p = current_q.prompt[j];
+
+      // Add the prompt to the final query
+      final_query = final_query.concat(`\n("${current_p.text}", ${qid_var});`);
+      // Set the variable for the prompt ID
+      final_query = final_query.concat(`\nSET ${pid_var} = LAST_INSERT_ID();`)
+
+      let a_query = `\nINSERT INTO \`ANSWER\` (\`text\`, \`correct\`, \`prompt_ID\`) VALUES`;
+      for (let k = 0; k < current_p.answer.length; k++) {
+        current_a = current_p.answer[k];
+
+        // Add the answer to the answer query
+        a_query = a_query.concat(`\n("${current_a.text}", ${current_a.correct}, ${pid_var}),`);
+      }
+      // Get rid of trailing commas and combine a_query into final query
+      a_query = a_query.replace(/.$/,";");
+      final_query = final_query.concat(a_query);
+    }
+  }
+
+  // Send out the query
+  const result = await db.query(final_query);
+
+  let message = 'Error in creating questions';
+  
+  if (result.length > 0) {
+    message = 'Question created successfully';
+  }
+  
+  return {message};
+}
+
 //Get Question
 async function get_question(QUESTION){
   const result = await db.query(
@@ -130,6 +177,7 @@ async function get_all_questions(PACKID){
 
   module.exports = {
     create_question,
+    create_questions,
     get_question,
     get_all_questions
   }
