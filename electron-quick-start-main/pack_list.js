@@ -15,6 +15,7 @@ function addPack(id, name, points_total, pack_score) {
     newButton.addEventListener('click', ()=> {
         localStorage.setItem("currentPackID", id)
         // put the navigation controls here
+        window.myAPI.send('navigate', 'launch');
     });
 
     // This is the base div for the progress bar

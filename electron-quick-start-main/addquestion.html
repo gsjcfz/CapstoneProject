@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="addquestion.js" defer></script>
+</head>
+<body>
+    <!-- Add this to your HTML -->
+    <div id="loadingResults" class="loading-results" style="display: none;">
+        Sending Results...
+    </div>
+
+    <div id="loadingScreen" class="loading-screen" style="display: none;">
+        <p>Loading questions...</p>
+    </div>
+    <!-- Container to center the progress bar and quiz container -->
+    <div class="content-container">
+        <!-- Progress bar container added above the quiz container -->
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress" id="mc_progress" style="width: 0%;"> <!-- Width will be dynamic -->
+                    <!-- Progress bar will be filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+        <div id="scoreDisplay" class="score-display"></div>
+        <div id="quiz_container" class="quiz-container">
+            <!-- The quiz content will be dynamically injected here -->
+        </div>
+    </div>
+    
+    <button id="return_to_menu" class="menu-button">Return to Menu</button>
+</body>
+</html>

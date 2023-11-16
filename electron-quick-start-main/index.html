@@ -49,12 +49,12 @@
     // Add event listeners
     loginBtn.addEventListener('click', () => {
       // Redirect to login page in the same directory
-      window.location.href = 'login.html';
+      window.myAPI.send('navigate', 'login');
     });
   
     registerBtn.addEventListener('click', () => {
       // Redirect to register page in the same directory
-      window.location.href = 'register.html';
+      window.myAPI.send('navigate', 'register');
     });
   </script>
   </body>
