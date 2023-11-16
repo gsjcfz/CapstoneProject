@@ -1,3 +1,5 @@
+import config from './config.js';
+
 function addPack(id, name, points_total, pack_score) {
     // This will be the container that will contain the new pack
     const packContainer = document.getElementById("pack_container");
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async function(event) {
     const mc_modal = document.getElementById('mc_modal');
 
     // We load in all the pack data here
-    await fetch('http://localhost:3000/pack/user', {
+    await fetch(`${config.web_server.host}/pack/user`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

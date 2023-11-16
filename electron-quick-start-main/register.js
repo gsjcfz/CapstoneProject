@@ -1,3 +1,5 @@
+import config from './config.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('register-form');
     document.getElementById('back').addEventListener('click', () => {
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/user', {
+            const response = await fetch(`${config.web_server.host}/user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

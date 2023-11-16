@@ -1,3 +1,5 @@
+import config from './config.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('login-form');
 
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/user/login', {
+            const response = await fetch(`${config.web_server.host}/user/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
