@@ -5,7 +5,7 @@ const config = require('../config');
 /* GET list of packs with creator info */
 async function listPacks(){
   const rows = await db.query(
-    `SELECT \`PACK\`.*, \`USER\`.\`name\`
+    `SELECT \`PACK\`.*
     FROM \`PACK\` INNER JOIN \`USER\` 
       ON \`PACK\`.\`username\` = \`USER\`.\`name\`;`
   );

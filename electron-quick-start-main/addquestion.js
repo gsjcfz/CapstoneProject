@@ -1,3 +1,5 @@
+import config from './config.js';
+
 const quizContainer = document.getElementById('quiz_container');
 const progressBarContainer = document.getElementById('progress_bar_container');
 
@@ -20,7 +22,7 @@ async function loadQuestionsFromServer(packId) {
     loadingScreen.style.display = 'flex'; // Show loading screen
 
     try {
-        const response = await fetch(`http://localhost:3000/question/all?pack=${packId}`);
+        const response = await fetch(`${config.web_server.host}/question/all?pack=${packId}`);
         const data = await response.json();
         allQuestions = data; // Store fetched questions in allQuestions
         loadQuestionFromServerData();
@@ -64,17 +66,14 @@ async function sendFinalScore(score) {
     loadingResults.style.display = 'block'; // Show loading message
 
     try {
-        const response = await fetch('http://localhost:3000/playerscore', {
+        const response = await fetch(
+            `${config.web_server.host}/playerscore?pack=${packId}&user=${username}&score=${score}`, 
+        {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + localStorage.getItem('accessToken')
-            },
-            body: JSON.stringify({
-                pack: packId,
-                user: username,
-                score: score
-            })
+            }
         });
 
         if (response.headers.get('Content-Type').includes('text/html')) {
