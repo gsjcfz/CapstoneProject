@@ -42,21 +42,21 @@ async function listPacksScores(username){
 }
 
 /* POST a new pack */
-async function createPack(pack){
+async function createPack(name, username){
   const result = await db.query(
     `INSERT INTO \`PACK\`
-    (\`name\`, \`user_ID\`) 
+    (\`name\`, \`username\`) 
     VALUES 
-    ('${pack.name}', ${pack.user_ID})`
+    ('${name}', '${username}')`
   );
 
-  let message = 'Error in creating pack';
+  let pack_ID = -1;
 
   if (result.affectedRows) {
-    message = 'Pack created successfully';
+    pack_ID = result.insertId;
   }
 
-  return {message};
+  return {pack_ID};
 }
 
 /* DELETE a pack */
