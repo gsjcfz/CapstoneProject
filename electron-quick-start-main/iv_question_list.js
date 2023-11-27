@@ -4,7 +4,7 @@ let question_data = [];
 
 function loadCurrentQuestionData() {
     console.log(question_data);
-    
+
     const questionContainer = document.getElementById("question_container");
     questionContainer.innerHTML = "";
     const header = document.createElement("h2");
@@ -27,37 +27,20 @@ function loadCurrentQuestionData() {
     newButton.addEventListener('click', async ()=> {
         // Edit the functionality of the add pack modal
         // TODO: Configure modals!
-        const ap_form = document.getElementById('ap_form');
-        ap_form.addEventListener('submit', async function(e) {
+        const add_question_modal = document.getElementById("add_question_modal");
+        const aq_form = document.getElementById('aq_form');
+        aq_form.addEventListener('submit', async function(e) {
             // Keeps the page from refreshing right after hitting submit
             e.preventDefault();
 
-            const pack_name = document.getElementById('name').value;
-            // Wipe all elements from the modal
-            add_pack_modal.innerHTML = "";
-            // POST new pack via web-server
-            await fetch(`${config.web_server.host}/pack`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': "Bearer " + localStorage.getItem('accessToken')
-                },
-                body: JSON.stringify({
-                    name: pack_name
-                })
-                
-            })
-                .then(response => response.json())
-                .then(data => {
-                    localStorage.setItem("currentPackID", data.pack_ID);
-                    // put the navigation controls here
-                    // TODO: create window navigation to question editor in main.js
-                    window.myAPI.send('navigate', 'main_menu');
-                });
+            const question_type = document.getElementById('type').value;
+            // TODO: Navigate to edit question
+            // Close the add pack modal
+            add_question_modal.style.display = 'none';
         });
 
         // Open the add pack modal
-        add_pack_modal.style.display = 'block';
+        add_question_modal.style.display = 'block';
     });
 
     newDiv.appendChild(newButton);
@@ -192,14 +175,13 @@ document.addEventListener('DOMContentLoaded', async function(event) {
     dq_modal_close.addEventListener('click', () => {
         delete_question_modal.style.display = 'none';
     });
-    // TODO: Fix Modals
-
-    // Add pack modal
-    const add_pack_modal = document.getElementById('add_pack_modal');
-    const ap_modal_close = document.getElementById('ap_close-modal');
-    ap_modal_close.addEventListener('click', () => {
-        add_pack_modal.style.display = 'none';
+    // Add question modal
+    const add_question_modal = document.getElementById('add_question_modal');
+    const aq_modal_close = document.getElementById('aq_close-modal');
+    aq_modal_close.addEventListener('click', () => {
+        add_question_modal.style.display = 'none';
     });
+    // TODO: Add New Modals
 
     // We load in all the question data here
     await fetch(`${config.web_server.host}/question/all?pack=${pack_ID}`, {

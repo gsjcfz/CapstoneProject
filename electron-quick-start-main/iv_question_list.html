@@ -28,15 +28,19 @@
 
     </div>
 
-    <div id="add_pack_modal" class="modal">
+    <div id="add_question_modal" class="modal">
         <div class="modal-content">
-            <form id="ap_form">
+            <form id="aq_form">
                 <div class="input-group">
-                    <label for="name">Please enter the name of the question pack:</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name">What is the question type of this new question?</label>
+                    <select id="type" name="type" required>
+                        <option value="Multiple_Choice">Multiple Choice</option>
+                        <option value="Matching">Matching</option>
+                        <option value="Check_All_That_Apply">Select All That Apply</option>
+                    </select>
                 </div>
-                <button type="submit" id="ap_submit">Create</button>
-                <button id="ap_close-modal">Cancel</button>
+                <button type="submit" id="aq_submit">Create</button>
+                <button id="aq_close-modal">Cancel</button>
             </form>
         </div>
     </div>

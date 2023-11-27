@@ -389,6 +389,15 @@ h1#mc_question {
     color: #fff;
 }
 
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #555;
+    color: #fff;
+}
+
 #login-btn {
     width: 100%;
     padding: 10px;
