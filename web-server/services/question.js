@@ -21,7 +21,9 @@ async function create_question(QUESTION){
   }
 
 async function create_questions(data) {
-  let final_query = "";
+  // We delete all questions within the specified pack before adding back the new ones.
+  const pack_ID = data.data[1].pack_ID;
+  let final_query = `DELETE FROM \`QUESTION\` WHERE \`QUESTION\`.\`pack_ID\` = ${pack_ID}`;
   const qid_var = "@qid";
   const pid_var = "@pid";
   for (let i = 0; i < data.data.length; i++) {
@@ -61,7 +63,7 @@ async function create_questions(data) {
   let message = 'Error in creating questions';
   
   if (result.length > 0) {
-    message = 'Question created successfully';
+    message = 'Questions created successfully';
   }
   
   return {message};
