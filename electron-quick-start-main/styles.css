@@ -80,6 +80,59 @@ body {
     text-align: left;
 }
 
+.skeleton-question {
+    padding: 20px;
+    width: 600px;
+    height: 75px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    cursor: default;
+    text-align: left;
+}
+
+.question-container {
+    background-color: #333;
+    padding: 50px;
+    padding-top: 20px;
+    align-self: baseline;
+    margin-top: 50px;
+    border-radius: 10px;
+    font-size: 22px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.question {
+    padding: 20px;
+    width: 600px;
+    background-color: #555;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    text-align: left;
+}
+
+.question-create {
+    padding: 20px;
+    width: 600px;
+    height: 60px;
+    background-color: #4c4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
 .pack-container {
     background-color: #333;
     padding: 50px;

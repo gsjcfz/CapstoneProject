@@ -83,20 +83,24 @@ async function get_question(QUESTION){
 
 //Get All Questions from a PACK
 async function get_all_questions(PACKID){
-  const data = await db.query(
+  let data = [];
+  data = await db.query(
     `SELECT \`Q\`.\`ID\` AS \`QID\`,\`Q\`.\`type\`, \`Q\`.\`level\`, \`Q\`.\`point_value\`, \`Q\`.\`image\` AS \`Qimage\`, \`Q\`.\`pack_ID\`,
     \`P\`.\`ID\` AS \`PID\`, \`P\`.\`text\` AS \`Ptext\`, \`P\`.\`image\` AS \`Pimage\`, \`P\`.\`question_ID\`,
     \`A\`.\`ID\` AS \`AID\`, \`A\`.\`text\` AS \`Atext\`, \`A\`.\`correct\`, \`A\`.\`image\` AS \`Aimage\`, \`A\`.\`prompt_ID\`
     FROM \`QUESTION\` AS \`Q\` INNER JOIN \`PROMPT\` AS \`P\`
         ON \`P\`.\`question_ID\` = \`Q\`.\`ID\`
-	    INNER JOIN \`ANSWER\` AS \`A\`
-	      ON \`A\`.\`prompt_ID\` = \`P\`.\`ID\`
-    WHERE \`Q\`.\`pack_ID\` = 1
+      INNER JOIN \`ANSWER\` AS \`A\`
+        ON \`A\`.\`prompt_ID\` = \`P\`.\`ID\`
+    WHERE \`Q\`.\`pack_ID\` = ${PACKID}
     ORDER BY \`LEVEL\`, \`Q\`.\`ID\`, \`P\`.\`ID\`, \`A\`.\`ID\`;`
   );
 
   // ordered loop is question.prompt.answer
   let ordered_data = []
+  if (data.length === 0) {
+    return ordered_data;
+  }
 
   let current_q = {};
   let current_p = {};

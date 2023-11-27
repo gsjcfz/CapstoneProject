@@ -57,8 +57,8 @@ ipcMain.on('navigate', (event, page) => {
             case 'iv_packs':
                 mainWindow.loadFile('iv_pack_list.html');
                 break;
-            case 'instructor-view':
-                mainWindow.loadFile('instructorview.html');
+            case 'iv_questions':
+                mainWindow.loadFile('iv_question_list.html');
                 break;
             case 'main_menu':
                 mainWindow.loadFile('main_menu.html');

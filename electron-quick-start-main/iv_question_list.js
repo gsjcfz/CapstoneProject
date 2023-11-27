@@ -1,6 +1,9 @@
 import config from './config.js';
 
-function addPack(id, name, creator) {
+let question_data = [];
+
+function addQuestion(id, name, creator) {
+    // TODO: FIX!!
     // This will be the container that will contain the new pack
     const packContainer = document.getElementById("pack_container");
 
@@ -14,8 +17,9 @@ function addPack(id, name, creator) {
     // This is the buttons functionality
     newButton.addEventListener('click', ()=> {
         localStorage.setItem("currentPackID", id);
-        // Navigate to question editor
-        window.myAPI.send('navigate', 'iv_questions');
+        // put the navigation controls here
+        // TODO: create window navigation to question editor in main.js
+        // window.myAPI.send('navigate', 'launch');
     });
 
     // This is the base div for displaying the creator
@@ -64,6 +68,8 @@ function addPack(id, name, creator) {
 }
 
 document.addEventListener('DOMContentLoaded', async function(event) {
+    const pack_ID = localStorage.getItem('currentPackID');
+    // TODO: Fix Modals
     // Configure Modal Elements
     // Add pack modal
     const add_pack_modal = document.getElementById('add_pack_modal');
@@ -78,8 +84,8 @@ document.addEventListener('DOMContentLoaded', async function(event) {
         delete_pack_modal.style.display = 'none';
     });
 
-    // We load in all the pack data here
-    await fetch(`${config.web_server.host}/pack`, {
+    // We load in all the question data here
+    await fetch(`${config.web_server.host}/question/all?pack=${pack_ID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -88,32 +94,38 @@ document.addEventListener('DOMContentLoaded', async function(event) {
     })
         .then(response => response.json())
         .then(data => {
-            // Remove our skeleton packs
+            // Remove our skeleton questions
             const skeletons = document.querySelectorAll(".skeleton");
             for (let i = 0; i < skeletons.length; i++) {
                 skeletons.item(i).remove();
             }
 
-            // Add the pack data
-            for (let i = 0; i < data.data.length; i++) {
-                let obj = data.data[i];
+            // Set global question data
+            question_data = JSON.parse(JSON.stringify(data));
+
+            console.log(question_data);
+
+            // Add the question data to UI
+            // for (let i = 0; i < data.length; i++) {
+            //     let obj = data[i];
         
-                addPack(obj.ID, obj.name, obj.username)
-            }
+            //     addQuestion(obj)
+            // }
         });
-    // This will be the button to create a new pack.
-    // When clicking this, it should create a new pack in the DB, set the current pack local variable
-    // and take the user to the question editor
-    const packContainer = document.getElementById("pack_container");
+    // This will be the button to create a new question.
+    // When clicking this, it should create a new element in the global variable question data, 
+    // and open the modal to edit a new question
+    const packContainer = document.getElementById("question_container");
 
     const newDiv = document.createElement("div");
     const newButton = document.createElement("button");
-    newButton.className = "pack-create";
-    const packName = document.createTextNode("Create New Pack");
+    newButton.className = "question-create";
+    const packName = document.createTextNode("Create New Question");
     newButton.appendChild(packName);
     // This is the buttons functionality
     newButton.addEventListener('click', async ()=> {
         // Edit the functionality of the add pack modal
+        // TODO: Configure modals!
         const ap_form = document.getElementById('ap_form');
         ap_form.addEventListener('submit', async function(e) {
             // Keeps the page from refreshing right after hitting submit
@@ -137,8 +149,9 @@ document.addEventListener('DOMContentLoaded', async function(event) {
                 .then(response => response.json())
                 .then(data => {
                     localStorage.setItem("currentPackID", data.pack_ID);
-                    // Navigate to question editor
-                    window.myAPI.send('navigate', 'iv_questions');
+                    // put the navigation controls here
+                    // TODO: create window navigation to question editor in main.js
+                    window.myAPI.send('navigate', 'main_menu');
                 });
         });
 
@@ -152,5 +165,5 @@ document.addEventListener('DOMContentLoaded', async function(event) {
     
 });
 document.getElementById('return_to_menu').addEventListener('click', () => {
-    window.myAPI.send('navigate', 'main_menu');
+    window.myAPI.send('navigate', 'iv_packs');
 });

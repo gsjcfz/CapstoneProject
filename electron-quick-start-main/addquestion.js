@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     updateProgress();
 });
 
+document.getElementById('return_to_menu').addEventListener('click', () => {
+    window.myAPI.send('navigate', 'main_menu');
+});
+
 
 async function loadQuestionsFromServer(packId) {
     const loadingScreen = document.getElementById('loadingScreen');
