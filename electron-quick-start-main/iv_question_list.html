@@ -32,7 +32,7 @@
         <div class="modal-content">
             <form id="aq_form">
                 <div class="input-group">
-                    <label for="name">What is the question type of this new question?</label>
+                    <label for="type">What is the question type of this new question?</label>
                     <select id="type" name="type" required>
                         <option value="Multiple_Choice">Multiple Choice</option>
                         <option value="Matching">Matching</option>
@@ -41,6 +41,51 @@
                 </div>
                 <button type="submit" id="aq_submit">Create</button>
                 <button id="aq_close-modal">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="multiple_choice_modal" class="modal">
+        <div class="modal-content">
+            <form id="mc_form">
+                <div class="input-group">
+                    <label for="point_value">Point Value:</label>
+                    <input type="text" id="mc_point_value" name="point_value" required>
+                    <label for="prompt">Prompt:</label>
+                    <textarea id="mc_prompt" name="prompt" required></textarea>
+                </div>
+                <div id="mc_answers"></div>
+                <div id="mc_add_a"></div>
+                <button type="submit" id="mc_submit">Create</button>
+                <button id="mc_close">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="cata_modal" class="modal">
+        <div class="modal-content">
+            <form id="cata_form">
+                <div class="input-group">
+                    <label for="prompt">Prompt:</label>
+                    <input type="text" id="cata_prompt" name="prompt" required>
+                </div>
+                <div>
+                    <button id="cata_add_a">New Answer</button>
+                </div>
+                <button type="submit" id="cata_submit">Create</button>
+                <button id="cata_close-modal">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="matching_modal" class="modal">
+        <div class="modal-content">
+            <form id="m_form">
+                <div>
+                    <button id="m_add_a">New Match</button>
+                </div>
+                <button type="submit" id="m_submit">Create</button>
+                <button id="m_close-modal">Cancel</button>
             </form>
         </div>
     </div>

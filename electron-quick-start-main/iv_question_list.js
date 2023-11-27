@@ -26,7 +26,6 @@ function loadCurrentQuestionData() {
     // This is the buttons functionality
     newButton.addEventListener('click', async ()=> {
         // Edit the functionality of the add pack modal
-        // TODO: Configure modals!
         const add_question_modal = document.getElementById("add_question_modal");
         const aq_form = document.getElementById('aq_form');
         aq_form.addEventListener('submit', async function(e) {
@@ -45,6 +44,103 @@ function loadCurrentQuestionData() {
 
     newDiv.appendChild(newButton);
     questionContainer.appendChild(newDiv);
+}
+
+function multipleChoiceModal(questionIndex=-1) {
+    // -----------============= LOAD THE MODAL =============-----------
+    let current_id = 0;
+    const modal = document.getElementById("multiple_choice_modal");
+    const form = document.getElementById("mc_form");
+    const answers = document.getElementById("mc_answers");
+    answers.innerHTML = '';
+    const newADiv = document.getElementById("mc_add_a");
+    newADiv.innerHTML = '';
+    const prompt = document.getElementById("mc_prompt");
+    const pointValue = document.getElementById("mc_point_value");
+    function mcAddAnswer(text="", correct=false) {
+        // Create new div to hold answer
+        const answer_div = document.createElement("div");
+        answer_div.className = "input-group";
+        // Create a button to delete the answer
+        const answer_delete = document.createElement("input");
+        answer_delete.type = "button";
+        answer_delete.value = "-";
+        answer_delete.style.cursor = "pointer";
+        answer_delete.style.width = "auto";
+        answer_delete.style.display = "table-cell";
+        answer_delete.style.backgroundColor = "#f44";
+        answer_delete.style.marginRight = "5px";
+        answer_delete.addEventListener('click', () => {
+            answer_div.remove();
+        });
+        answer_div.appendChild(answer_delete);
+        // Create text box input for the answer text
+        const answer_text = document.createElement("input");
+        answer_text.type = "text";
+        answer_text.name = `a_text${current_id}`;
+        answer_text.required = "required";
+        answer_text.value = text;
+        answer_text.style.width = "auto";
+        answer_text.style.display = "table-cell";
+        answer_div.appendChild(answer_text);
+        // Create a radio button for whether the answer is correct or not
+        const answer_correct = document.createElement("input");
+        answer_correct.type = "radio";
+        answer_correct.name = "a_correct";
+        answer_correct.id = `a_correct${current_id}`;
+        answer_correct.value = "Correct?";
+        answer_correct.required = "required";
+        answer_correct.checked = correct;
+        answer_correct.style.width = "auto";
+        answer_correct.style.display = "table-cell";
+        answer_div.appendChild(answer_correct);
+        
+
+        // Append the answer div to the form
+        answers.appendChild(answer_div);
+        current_id++;
+    }
+
+    // Load previous question's data, if applicable
+    prompt.style.width = "auto";
+    pointValue.style.width = "auto";
+    if (questionIndex != -1) {
+        let question = question_data[questionIndex];
+        let pObj = question.prompt[0];
+        prompt.value = pObj.text;
+        pointValue.value = question.point_value;
+        for (let i = 0; i < pObj.answer.length; i++) {
+            let answer = pObj.answer[i];
+            mcAddAnswer(answer.text, Boolean(answer.correct));
+        }
+    }
+
+    // -----------============= MODAL FUNCTIONALITY =============-----------
+    // Configure button to add new answers
+    const newA = document.createElement("input");
+    newA.type = "button";
+    newA.value = "New Answer";
+    newA.addEventListener('click', () => {
+        mcAddAnswer();
+    });
+    newADiv.appendChild(newA);
+
+    // Configure what happens when the form is submitted
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        modal.style.display = "none";
+    });
+
+    modal.style.display = 'block';
+}
+
+function matchingModal(questionIndex=-1) {
+    
+}
+
+function selectAllThatApplyModal(questionIndex=-1) {
+    
 }
 
 function addMultipleChoice(question, qElement) {
@@ -114,25 +210,35 @@ function addQuestion(question) {
     questionButton.appendChild(pointValue);
     
     const question_type = question.type;
-        switch (question_type) {
-            case "Multiple_Choice":
-                addMultipleChoice(question, questionButton);
-                break;
-            case "Matching":
-                addMatching(question, questionButton);
-                break;
-            case "Check_All_That_Apply":
-                addMultipleChoice(question, questionButton);
-                break;
-            // You may add more types here
-            default:
-                console.error(`unknown question type: ${question_type}`);
-        }
+    const questionIndex = question_data.indexOf(question);
+    switch (question_type) {
+        case "Multiple_Choice":
+            addMultipleChoice(question, questionButton);
+            // This is the buttons functionality
+            questionButton.addEventListener('click', ()=> {
+                multipleChoiceModal(questionIndex);
+            });
+            break;
+        case "Matching":
+            addMatching(question, questionButton);
+            // This is the buttons functionality
+            questionButton.addEventListener('click', ()=> {
+                matchingModal(questionIndex);
+            });
+            break;
+        case "Check_All_That_Apply":
+            addMultipleChoice(question, questionButton);
+            // This is the buttons functionality
+            questionButton.addEventListener('click', ()=> {
+                selectAllThatApplyModal(questionIndex);
+            });
+            break;
+        // You may add more types here
+        default:
+            console.error(`unknown question type: ${question_type}`);
+    }
     
-    // This is the buttons functionality
-    questionButton.addEventListener('click', ()=> {
-        // TODO: create navigation to modal
-    });
+    
 
     // This is the button for deletion
     const deleteButton = document.createElement("button");
@@ -181,6 +287,12 @@ document.addEventListener('DOMContentLoaded', async function(event) {
     aq_modal_close.addEventListener('click', () => {
         add_question_modal.style.display = 'none';
     });
+    // Multiple Choice modal
+    const multiple_choice_modal = document.getElementById('multiple_choice_modal');
+    const mc_modal_close = document.getElementById('mc_close');
+    mc_modal_close.addEventListener('click', () => {
+        multiple_choice_modal.style.display = 'none';
+    })
     // TODO: Add New Modals
 
     // We load in all the question data here
