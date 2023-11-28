@@ -59,9 +59,7 @@ function loadCurrentQuestionData() {
 }
 
 function multipleChoiceModal(questionIndex=-1) {
-    // -----------============= LOAD THE MODAL =============-----------
     const question_type = "Multiple_Choice";
-    let current_id = 0;
     const answerName = "mc_text";
     const correctName = "mc_correct";
     const modal = document.getElementById("question_modal");
@@ -80,8 +78,6 @@ function multipleChoiceModal(questionIndex=-1) {
     pointValLabel.textContent = "Point Value:"
     const pointValue = document.createElement("input");
     pointValue.type = "text";
-    pointValue.id = "point_value";
-    pointValue.name = "point_value";
     pointValue.required = true;
     pointValue.style.width = "auto";
     // Configure the prompt input
@@ -89,8 +85,6 @@ function multipleChoiceModal(questionIndex=-1) {
     promptLabel.for = "prompt";
     promptLabel.textContent = "Prompt:"
     const prompt = document.createElement("textarea");
-    prompt.id = "prompt";
-    prompt.name = "prompt";
     prompt.required = true;
     prompt.style.width = "auto";
     // Append upwards
@@ -123,7 +117,6 @@ function multipleChoiceModal(questionIndex=-1) {
         const answer_text = document.createElement("input");
         answer_text.type = "text";
         answer_text.name = answerName;
-        answer_text.id = `mc_text${current_id}`;
         answer_text.required = "required";
         answer_text.value = text;
         answer_text.style.width = "auto";
@@ -133,7 +126,6 @@ function multipleChoiceModal(questionIndex=-1) {
         const answer_correct = document.createElement("input");
         answer_correct.type = "radio";
         answer_correct.name = correctName;
-        answer_correct.id = `mc_correct${current_id}`;
         answer_correct.value = "Correct?";
         answer_correct.required = "required";
         answer_correct.checked = correct;
@@ -143,7 +135,6 @@ function multipleChoiceModal(questionIndex=-1) {
 
         // Append the answer div to the form
         answers.appendChild(answer_div);
-        current_id++;
     }
     // Create add answer button
     const newADiv = document.createElement("div");
@@ -239,11 +230,340 @@ function multipleChoiceModal(questionIndex=-1) {
 }
 
 function matchingModal(questionIndex=-1) {
+    const question_type = "Matching";
+    const promptName = "m_prompt";
+    const answerName = "m_text";
+    const modal = document.getElementById("question_modal");
+    const content = document.getElementById("modal_content");
+    content.innerHTML = '';
     
+    // Create the form
+    const form = document.createElement("form");
+
+    // Create the main input group
+    const firstDiv = document.createElement("div");
+    firstDiv.className = "input-group";
+    // Configure the main input group
+    const pointValLabel = document.createElement("label");
+    pointValLabel.for = "point_value";
+    pointValLabel.textContent = "Point Value:"
+    const pointValue = document.createElement("input");
+    pointValue.type = "text";
+    pointValue.required = true;
+    pointValue.style.width = "auto";
+    // Append upwards
+    firstDiv.append(pointValLabel, pointValue);
+    form.appendChild(firstDiv);
+
+    // Create empty answer list
+    const answers = document.createElement("div");
+    // Function for adding new answers
+    function mAddAnswer(prompt="", text="") {
+        // Create new div to hold answer
+        const answer_div = document.createElement("div");
+        answer_div.className = "input-group";
+        answer_div.style.marginBottom = "3px";
+        // Create a button to delete the answer
+        const answer_delete = document.createElement("input");
+        answer_delete.type = "button";
+        answer_delete.value = "-";
+        answer_delete.style.cursor = "pointer";
+        answer_delete.style.width = "auto";
+        answer_delete.style.display = "table-cell";
+        answer_delete.style.backgroundColor = "#f44";
+        answer_delete.style.marginRight = "5px";
+        answer_delete.addEventListener('click', () => {
+            answer_div.remove();
+        });
+        answer_div.appendChild(answer_delete);
+        // Create textarea for the prompt
+        const answer_prompt = document.createElement("textarea");
+        answer_prompt.name = promptName;
+        answer_prompt.required = "required";
+        answer_prompt.value = prompt;
+        answer_prompt.style.width = "auto";
+        answer_prompt.style.display = "table-cell";
+        answer_div.appendChild(answer_prompt);
+        // Create a text node to represent the match
+        const temp_text = document.createTextNode("->");
+        answer_div.appendChild(temp_text);
+        // Create text box input for the answer text
+        const answer_text = document.createElement("input");
+        answer_text.type = "text";
+        answer_text.name = answerName;
+        answer_text.required = "required";
+        answer_text.value = text;
+        answer_text.style.width = "auto";
+        answer_text.style.display = "table-cell";
+        answer_div.appendChild(answer_text);
+
+        // Append the answer div to the form
+        answers.appendChild(answer_div);
+    }
+    // Create add answer button
+    const newADiv = document.createElement("div");
+    const newA = document.createElement("input");
+    newA.type = "button";
+    newA.value = "New Pair";
+    newA.addEventListener('click', () => {
+        mAddAnswer();
+    });
+    newADiv.appendChild(newA);
+
+    // Append upwards
+    form.append(answers, newADiv);
+
+    // Load previous question's data, if applicable
+    if (questionIndex != -1) {
+        let question = question_data[questionIndex];
+        pointValue.value = question.point_value;
+        for (let i = 0; i < question.prompt.length; i++) {
+            let prompt = question.prompt[i];
+            for (let j = 0; j < prompt.answer.length; j++) {
+                let answer = prompt.answer[j];
+                if (answer.correct == 1) {
+                    mAddAnswer(prompt.text, answer.text);
+                    break;
+                }
+            }
+        }
+    }
+    else {
+        pointValue.value = "";
+        mAddAnswer();
+    }
+
+    // Close button
+    const close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "Cancel";
+    close.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    // Submit button
+    const submit = document.createElement("button");
+    submit.type = "submit";
+    submit.textContent = "Create";
+    // Configure what happens when the form is submitted
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Loop through our answers and prompts and do a cartesian product thingy to add them all
+        let prompt_list = [];
+        const a_prompts = document.getElementsByName(promptName);
+        for (let i = 0; i < a_prompts.length; i++) {
+            let answer_list = [];
+            const a_texts = document.getElementsByName(answerName);
+            for (let j = 0; j < a_texts.length; j++) {
+                const answer = {
+                    text    : a_texts[j].value,
+                    correct : + (i == j)
+                };
+                answer_list.push(answer);
+            }
+            const prompt = {
+                text        : a_prompts[i].value,
+                answer      : answer_list
+            };
+            prompt_list.push(prompt);
+        }
+
+        // Set attributes
+        const new_question = {
+            type        : question_type,
+            point_value : Number(pointValue.value),
+            pack_ID     : localStorage.getItem("currentPackID"),
+            prompt      : prompt_list
+        };
+
+        // Replace the old question (if it exists) otherwise, add it
+        if (questionIndex != -1) {
+            question_data[questionIndex] = new_question;
+        }
+        else {
+            question_data.push(new_question);
+        }
+
+        // Reload the question list
+        loadCurrentQuestionData();
+
+        modal.style.display = "none";
+    });
+
+    // Append upwards
+    form.append(submit, close);
+    content.append(form);
+
+    modal.style.display = 'block';
 }
 
 function selectAllThatApplyModal(questionIndex=-1) {
+    const question_type = "Check_All_That_Apply";
+    const answerName = "cata_text";
+    const correctName = "cata_correct";
+    const modal = document.getElementById("question_modal");
+    const content = document.getElementById("modal_content");
+    content.innerHTML = '';
     
+    // Create the form
+    const form = document.createElement("form");
+
+    // Create the main input group
+    const firstDiv = document.createElement("div");
+    firstDiv.className = "input-group";
+    // Configure the main input group
+    const pointValLabel = document.createElement("label");
+    pointValLabel.for = "point_value";
+    pointValLabel.textContent = "Point Value:"
+    const pointValue = document.createElement("input");
+    pointValue.type = "text";
+    pointValue.required = true;
+    pointValue.style.width = "auto";
+    // Configure the prompt input
+    const promptLabel = document.createElement("label");
+    promptLabel.for = "prompt";
+    promptLabel.textContent = "Prompt:"
+    const prompt = document.createElement("textarea");
+    prompt.required = true;
+    prompt.style.width = "auto";
+    // Append upwards
+    firstDiv.append(pointValLabel, pointValue, promptLabel, prompt);
+    form.appendChild(firstDiv);
+
+    // Create empty answer list
+    const answers = document.createElement("div");
+    // Function for adding new answers
+    function cataAddAnswer(text="", correct=false) {
+        // Create new div to hold answer
+        const answer_div = document.createElement("div");
+        answer_div.className = "input-group";
+        answer_div.style.marginBottom = "3px";
+        // Create a button to delete the answer
+        const answer_delete = document.createElement("input");
+        answer_delete.type = "button";
+        answer_delete.value = "-";
+        answer_delete.style.cursor = "pointer";
+        answer_delete.style.width = "auto";
+        answer_delete.style.display = "table-cell";
+        answer_delete.style.backgroundColor = "#f44";
+        answer_delete.style.marginRight = "5px";
+        answer_delete.addEventListener('click', () => {
+            answer_div.remove();
+        });
+        answer_div.appendChild(answer_delete);
+        // Create text box input for the answer text
+        const answer_text = document.createElement("input");
+        answer_text.type = "text";
+        answer_text.name = answerName;
+        answer_text.required = "required";
+        answer_text.value = text;
+        answer_text.style.width = "auto";
+        answer_text.style.display = "table-cell";
+        answer_div.appendChild(answer_text);
+        // Create a radio button for whether the answer is correct or not
+        const answer_correct = document.createElement("input");
+        answer_correct.type = "checkbox";
+        answer_correct.name = correctName;
+        answer_correct.value = "Correct?";
+        answer_correct.checked = correct;
+        answer_correct.style.width = "auto";
+        answer_correct.style.display = "table-cell";
+        answer_div.appendChild(answer_correct);
+
+        // Append the answer div to the form
+        answers.appendChild(answer_div);
+    }
+    // Create add answer button
+    const newADiv = document.createElement("div");
+    const newA = document.createElement("input");
+    newA.type = "button";
+    newA.value = "New Answer";
+    newA.addEventListener('click', () => {
+        cataAddAnswer();
+    });
+    newADiv.appendChild(newA);
+
+    // Append upwards
+    form.append(answers, newADiv);
+
+    // Load previous question's data, if applicable
+    if (questionIndex != -1) {
+        let question = question_data[questionIndex];
+        let pObj = question.prompt[0];
+        prompt.value = pObj.text;
+        pointValue.value = question.point_value;
+        for (let i = 0; i < pObj.answer.length; i++) {
+            let answer = pObj.answer[i];
+            cataAddAnswer(answer.text, Boolean(answer.correct));
+        }
+    }
+    else {
+        prompt.value = "";
+        pointValue.value = "";
+        cataAddAnswer();
+    }
+
+    // Close button
+    const close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "Cancel";
+    close.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    // Submit button
+    const submit = document.createElement("button");
+    submit.type = "submit";
+    submit.textContent = "Create";
+    // Configure what happens when the form is submitted
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Loop through our answers and get a list of all of them
+        const answer_list = [];
+        const a_texts = document.getElementsByName(answerName);
+        const a_corrects = document.getElementsByName(correctName);
+        for (let i = 0; i < a_texts.length; i++) {
+            const answer = {
+                text    : a_texts[i].value,
+                correct : + a_corrects[i].checked
+            };
+            
+            answer_list.push(answer);
+        }
+
+        // Set prompt data
+        const prompt_list = [{
+            text        : prompt.value,
+            answer      : answer_list
+        }];
+
+        // Set attributes
+        const new_question = {
+            type        : question_type,
+            point_value : Number(pointValue.value),
+            pack_ID     : localStorage.getItem("currentPackID"),
+            prompt      : prompt_list
+        };
+
+        // Replace the old question (if it exists) otherwise, add it
+        if (questionIndex != -1) {
+            question_data[questionIndex] = new_question;
+        }
+        else {
+            question_data.push(new_question);
+        }
+
+        // Reload the question list
+        loadCurrentQuestionData();
+
+        modal.style.display = "none";
+    });
+
+    // Append upwards
+    form.append(submit, close);
+    content.append(form);
+
+    modal.style.display = 'block';
 }
 
 function addMultipleChoice(question, qElement) {
