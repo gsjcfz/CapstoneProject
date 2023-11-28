@@ -40,25 +40,13 @@
                     </select>
                 </div>
                 <button type="submit" id="aq_submit">Create</button>
-                <button id="aq_close-modal">Cancel</button>
+                <button type="button" id="aq_close-modal">Cancel</button>
             </form>
         </div>
     </div>
 
-    <div id="multiple_choice_modal" class="modal">
-        <div class="modal-content">
-            <form id="mc_form">
-                <div class="input-group">
-                    <label for="point_value">Point Value:</label>
-                    <input type="text" id="mc_point_value" name="point_value" required>
-                    <label for="prompt">Prompt:</label>
-                    <textarea id="mc_prompt" name="prompt" required></textarea>
-                </div>
-                <div id="mc_answers"></div>
-                <div id="mc_add_a"></div>
-                <button type="submit" id="mc_submit">Create</button>
-                <button id="mc_close">Cancel</button>
-            </form>
+    <div id="question_modal" class="modal">
+        <div id="modal_content" class="modal-content">
         </div>
     </div>
 
