@@ -45,9 +45,6 @@ function loadQuestionFromServerData() {
             case 'Multiple_Choice':
                 addMultipleChoiceQuestionFromServerData(questionData);
                 break;
-            case 'True_False':
-                addTrueFalseQuestionFromServerData(questionData);
-                break;
             case 'Matching':
                 addMatchingQuestionFromServerData(questionData);
                 break;
@@ -96,12 +93,14 @@ async function sendFinalScore(score) {
 }
 
 
-function loadNextQuestion() {
+async function loadNextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex < allQuestions.length) {
         loadQuestionFromServerData();
         updateProgress(); // Update the progress bar after loading the next question
     } else {
+
+        updateProgress();
         // Calculate the final score as a percentage
         let finalScore = (correctAnswersCount / allQuestions.length) * 100;
 
@@ -109,10 +108,10 @@ function loadNextQuestion() {
         console.log('Quiz completed. Final Score:', finalScore);
 
         // Send the final score to the server
-        sendFinalScore(finalScore);
+        await sendFinalScore(finalScore);
 
         // Navigate to main menu
-       // window.myAPI.send('navigate', 'main_menu');
+        window.myAPI.send('navigate', 'main_menu');
     }
 }
 
