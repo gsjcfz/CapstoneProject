@@ -21,14 +21,15 @@ async function create_question(QUESTION){
   }
 
 async function create_questions(data) {
+  console.log(data);
   // We delete all questions within the specified pack before adding back the new ones.
-  const pack_ID = data.data[1].pack_ID;
-  let final_query = `DELETE FROM \`QUESTION\` WHERE \`QUESTION\`.\`pack_ID\` = ${pack_ID}`;
+  const pack_ID = data.question_data[0].pack_ID;
+  let final_query = `DELETE FROM \`QUESTION\` WHERE \`QUESTION\`.\`pack_ID\` = ${pack_ID};`;
   const qid_var = "@qid";
   const pid_var = "@pid";
-  for (let i = 0; i < data.data.length; i++) {
+  for (let i = 0; i < data.question_data.length; i++) {
     final_query = final_query.concat(`\nINSERT INTO \`QUESTION\` (\`type\`, \`point_value\`, \`pack_ID\`) VALUES`);
-    current_q = data.data[i];
+    current_q = data.question_data[i];
 
     // Add the question to the final query
     final_query = final_query.concat(`\n("${current_q.type}", ${current_q.point_value}, ${current_q.pack_ID});`);

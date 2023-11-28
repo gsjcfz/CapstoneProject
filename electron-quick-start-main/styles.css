@@ -103,6 +103,21 @@ body {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
+.question-save {
+    padding: 20px;
+    width: 600px;
+    height: 60px;
+    background-color: #c64;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
 .question {
     padding: 20px;
     width: 600px;

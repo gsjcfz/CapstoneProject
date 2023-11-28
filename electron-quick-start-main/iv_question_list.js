@@ -18,13 +18,13 @@ function loadCurrentQuestionData() {
     // This will be the button to create a new question.
     // When clicking this, it should create a new element in the global variable question data, 
     // and open the modal to edit a question
-    const newDiv = document.createElement("div");
-    const newButton = document.createElement("button");
-    newButton.className = "question-create";
+    const createDiv = document.createElement("div");
+    const createQuestion = document.createElement("button");
+    createQuestion.className = "question-create";
     const createText = document.createTextNode("Create New Question");
-    newButton.appendChild(createText);
+    createQuestion.appendChild(createText);
     // This is the buttons functionality
-    newButton.addEventListener('click', async ()=> {
+    createQuestion.addEventListener('click', async ()=> {
         // Edit the functionality of the add pack modal
         const add_question_modal = document.getElementById("add_question_modal");
         const aq_form = document.getElementById('aq_form');
@@ -53,9 +53,33 @@ function loadCurrentQuestionData() {
         // Open the add question modal
         add_question_modal.style.display = 'block';
     });
+    createDiv.appendChild(createQuestion);
+    questionContainer.appendChild(createDiv);
 
-    newDiv.appendChild(newButton);
-    questionContainer.appendChild(newDiv);
+    // This will be the button to save changes
+    const saveDiv = document.createElement("div");
+    const saveQuestions = document.createElement("button");
+    saveQuestions.className = "question-save";
+    const saveText = document.createTextNode("Save Changes");
+    saveQuestions.appendChild(saveText);
+    // This is the buttons functionality
+    saveQuestions.addEventListener('click', async ()=> {
+        saveText.textContent = "Changes Being Saved...";
+        saveQuestions.disabled = true;
+
+        const response = await fetch(`${config.web_server.host}/question/many`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + localStorage.getItem('accessToken')
+            },
+            body: JSON.stringify({question_data})
+        });
+
+        window.myAPI.send('navigate', 'iv_packs');
+    });
+    saveDiv.appendChild(saveQuestions);
+    questionContainer.appendChild(saveDiv);
 }
 
 function multipleChoiceModal(questionIndex=-1) {
