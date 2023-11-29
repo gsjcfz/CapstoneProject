@@ -4,7 +4,9 @@ const quizContainer = document.getElementById('quiz_container');
 const progressBarContainer = document.getElementById('progress_bar_container');
 
 let correctAnswersCount = 0; // Tracks the number of correct answers
-const maxScore = 100; // The maximum score, for example, if 10 questions and each is worth 10 points
+let totalPointsGained = 0; // Tracks the total points gained
+let totalPointsPossible = 0; // Tracks the total points possible
+const maxScore = 100; // The maximum score, for example, if 10 questions and each is wo
 
 let allQuestions = []; // Array to store all questions from the server
 let currentQuestionIndex = 0; // Tracks the current question index
@@ -14,6 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loadQuestionsFromServer(packId);
     addProgressBar();
     updateProgress();
+    
 });
 
 document.getElementById('return_to_menu').addEventListener('click', () => {
@@ -29,12 +32,20 @@ async function loadQuestionsFromServer(packId) {
         const response = await fetch(`${config.web_server.host}/question/all?pack=${packId}`);
         const data = await response.json();
         allQuestions = data; // Store fetched questions in allQuestions
+
+        // Calculate total points possible
+        allQuestions.forEach(question => {
+            totalPointsPossible += question.point_value;
+        });
+
         loadQuestionFromServerData();
     } catch (error) {
         console.error('Error fetching questions:', error);
     } finally {
         loadingScreen.style.display = 'none'; // Hide loading screen
     }
+
+    
 }
 
 
@@ -93,24 +104,17 @@ async function sendFinalScore(score) {
 }
 
 
+// Modified loadNextQuestion function
 async function loadNextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex < allQuestions.length) {
         loadQuestionFromServerData();
         updateProgress(); // Update the progress bar after loading the next question
     } else {
-
         updateProgress();
-        // Calculate the final score as a percentage
-        let finalScore = (correctAnswersCount / allQuestions.length) * 100;
-
-        // Handle quiz completion here
+        let finalScore = totalPointsGained;
         console.log('Quiz completed. Final Score:', finalScore);
-
-        // Send the final score to the server
         await sendFinalScore(finalScore);
-
-        // Navigate to main menu
         window.myAPI.send('navigate', 'main_menu');
     }
 }
@@ -199,20 +203,20 @@ function addMatchingQuestionFromServerData(questionData) {
             const promptEl = document.createElement('h2');
             promptEl.textContent = prompt.text;
             quizContainer.appendChild(promptEl);
-            
+
             prompt.answer.forEach(option => {
                 const label = document.createElement('label');
-                const radio_btn = document.createElement('input');
-                radio_btn.type = 'radio';
-                radio_btn.className = 'matching_option';
-                radio_btn.value = option.correct; // Store whether the option is correct
-                radio_btn.name = prompt.text;
-                
-                label.appendChild(radio_btn);
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.className = 'matching_option';
+                radio.value = option.correct; // Store whether the option is correct
+                radio.name = prompt.text;
+
+                label.appendChild(radio);
                 label.appendChild(document.createTextNode(option.text));
                 quizContainer.appendChild(label);
             });
-        })
+        });
 
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Submit';
@@ -238,31 +242,10 @@ function handleMatchingSubmission(prompts) {
     loadNextQuestion();
 }
 
-function addTrueFalseQuestionFromServerData(questionData) {
-    clearQuizContent();
-
-    // Assuming there's one prompt with a true/false answer
-    const questionPrompt = questionData.prompt[0];
-    const questionEl = document.createElement('h1');
-    questionEl.textContent = questionPrompt.text;
-    quizContainer.appendChild(questionEl);
-
-    // Assuming the answer array contains two elements: True and False
-    questionPrompt.answer.forEach(option => {
-        const button = document.createElement('button');
-        button.textContent = option.text; // 'True' or 'False'
-        button.className = 'tf_option';
-        button.addEventListener('click', () => {
-            const isCorrect = option.correct === 1;
-            updateProgress();
-            loadNextQuestion();
-        });
-        quizContainer.appendChild(button);
-    });
-}
 
 function clearQuizContent() {
     quizContainer.innerHTML = ''; // Clears out all inner content
+    scoreDisplay.textContent = `Current Score: ${totalPointsGained}/${totalPointsPossible} Points`;
 }
 
 function addProgressBar() {
@@ -287,23 +270,34 @@ function addProgressBar() {
     }
 }
 
+// Modified updateProgress function
 function updateProgress(isCorrect) {
     if (isCorrect) {
         correctAnswersCount++;
+        totalPointsGained += allQuestions[currentQuestionIndex].point_value;
     }
-    // Progress is based on the number of questions answered out of the total
+    if(isCorrect == false)
+    {
+        triggerRedFlash();
+    }
     let progressPercentage = (currentQuestionIndex / allQuestions.length) * 100;
     document.getElementById('mc_progress').style.width = `${progressPercentage}%`;
     updateScoreDisplay();
 }
 
+function triggerRedFlash() {
+    const body = document.body;
+    body.classList.add('flash-effect');
+
+    setTimeout(() => {
+        body.classList.remove('flash-effect');
+    }, 1000); // This should match the duration of the animation
+}
+
+// Modified updateScoreDisplay function
 function updateScoreDisplay() {
-    let percentCorrect = 0;
-    if (allQuestions.length > 0) {
-        percentCorrect = (correctAnswersCount / allQuestions.length) * 100;
-    }
     const scoreDisplay = document.getElementById('scoreDisplay');
-    scoreDisplay.textContent = `Correct Answers: ${percentCorrect.toFixed(2)}%`;
+    scoreDisplay.textContent = `Current Score: ${totalPointsGained}/${totalPointsPossible} Points`;
 }
 
 // Call updateScoreDisplay() in the same places you call updateProgress()
