@@ -19,21 +19,40 @@ async function loadPackLeaderboard(pack_no, context) {
             lb_body.classList.remove("skeleton");
             data.scores.forEach((row, idx) => {
                 let tablerow = document.createElement("tr");
+                
+                if (row["username"]==localStorage.getItem("username")) {
+                    row["username"] = "YOU";
+                    tablerow.id = "you";
+                }
 
-                let rank = document.createElement("td");
-                rank.innerHTML = idx+1;
-                tablerow.appendChild(rank);
-                
-                let name = document.createElement("td");
-                name.innerHTML = row["username"];
-                tablerow.appendChild(name);
-                
-                let score = document.createElement("td");
-                score.innerHTML = row["pack_score"];
-                tablerow.appendChild(score);
-    
+                tablerow.innerHTML = `
+                <td>${idx+1}</td>
+                <td>${row["username"]}</td>
+                <td>${row["pack_score"]}</td> `;
+
                 lb_body.appendChild(tablerow);
             })
+            if (!(lb_body.querySelector("#you"))) {
+                let emptyrow = document.createElement("tr");
+                emptyrow.innerHTML =  `
+                <td>...</td>
+                <td> </td>
+                <td>#</td> `;
+                lb_body.appendChild(emptyrow);
+            
+                let packs = JSON.parse(localStorage.getItem("currentPackList")).data;
+                let the_pack = packs.find((pack)=>{return Number(pack.ID)==Number(pack_no);});
+                if (!(the_pack.pack_score)) {
+                    the_pack.pack_score = 0;
+                }
+                let yourow = document.createElement("tr");
+                yourow.innerHTML = `
+                <td>?</td>
+                <td>YOU</td>
+                <td>${the_pack.pack_score}</td> `;
+                yourow.id = "you";
+                lb_body.appendChild(yourow);
+            }
         });
     }
     
