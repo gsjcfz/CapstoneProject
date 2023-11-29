@@ -24,6 +24,7 @@ function std_err(code, err=undefined) {
         "404": "Look Harder",
         "409": "I'm So Conflicted",
         "418": "I'm a Teapot",
+        "420": "Enhance Your Calm",
         "500": "Oopsy Daisy",
         "nonexistent": "Critical Existence Failure",
     };
@@ -34,6 +35,7 @@ function std_err(code, err=undefined) {
         "404": "A record or endpoint you requested is not available.",
         "409": "A data conflict exists that prohibited the completion of your request.",
         "418": "Requested endpoint is short and stout",
+        "420": "Chill out man, you're like,, rate limited",
         "500": "Unhandled internal error. Your request might be bad, but we don't know how.",
         "nonexistent": "All or a portion of a record you attempted to modify doesn't exist.",
     }
