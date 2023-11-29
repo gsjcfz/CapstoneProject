@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 document.getElementById('return_to_menu').addEventListener('click', () => {
-    window.myAPI.send('navigate', 'main_menu');
+    window.myAPI.send('navigate', 'game');
 });
 
 
@@ -112,7 +112,7 @@ async function loadNextQuestion() {
         let finalScore = totalPointsGained;
         console.log('Quiz completed. Final Score:', finalScore);
         await sendFinalScore(finalScore);
-        window.myAPI.send('navigate', 'main_menu');
+        window.myAPI.send('navigate', 'game');
     }
 }
 
