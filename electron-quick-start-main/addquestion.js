@@ -131,7 +131,8 @@ function addCheckAllThatApplyQuestionFromServerData(questionData) {
             checkbox.type = 'checkbox';
             checkbox.className = 'check_all_option';
             checkbox.value = option.correct; // Store whether the option is correct
-
+            
+            label.className = 'checkbox_all_option_label';
             label.appendChild(checkbox);
             label.appendChild(document.createTextNode(option.text));
             quizContainer.appendChild(label);
@@ -139,6 +140,7 @@ function addCheckAllThatApplyQuestionFromServerData(questionData) {
 
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Submit';
+        submitButton.className = 'submit-btn';
         submitButton.addEventListener('click', () => handleCheckAllThatApplySubmission(questionPrompt.answer));
         quizContainer.appendChild(submitButton);
     } else {
@@ -214,6 +216,7 @@ function addMatchingQuestionFromServerData(questionData) {
 
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Submit';
+        submitButton.className = 'submit-btn';
         submitButton.addEventListener('click', () => handleMatchingSubmission(questionData.prompt));
         quizContainer.appendChild(submitButton);
     } else {
