@@ -2016,3 +2016,11 @@ h1#mc_question {
 }
 
 /* Reusing the same styles for input-group, label, input, and button from the login page */
+@keyframes redFlash {
+    0% { background-color: red; }
+    100% { background-color: transparent; }
+}
+
+.flash-effect {
+    animation: redFlash 1s; /* Adjust the time as needed */
+}

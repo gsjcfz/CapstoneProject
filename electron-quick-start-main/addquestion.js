@@ -6,7 +6,7 @@ const progressBarContainer = document.getElementById('progress_bar_container');
 let correctAnswersCount = 0; // Tracks the number of correct answers
 let totalPointsGained = 0; // Tracks the total points gained
 let totalPointsPossible = 0; // Tracks the total points possible
-
+const maxScore = 100; // The maximum score, for example, if 10 questions and each is wo
 
 let allQuestions = []; // Array to store all questions from the server
 let currentQuestionIndex = 0; // Tracks the current question index
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loadQuestionsFromServer(packId);
     addProgressBar();
     updateProgress();
+    
 });
 
 document.getElementById('return_to_menu').addEventListener('click', () => {
@@ -43,6 +44,8 @@ async function loadQuestionsFromServer(packId) {
     } finally {
         loadingScreen.style.display = 'none'; // Hide loading screen
     }
+
+    
 }
 
 
@@ -238,31 +241,10 @@ function handleMatchingSubmission(prompts) {
     loadNextQuestion();
 }
 
-function addTrueFalseQuestionFromServerData(questionData) {
-    clearQuizContent();
-
-    // Assuming there's one prompt with a true/false answer
-    const questionPrompt = questionData.prompt[0];
-    const questionEl = document.createElement('h1');
-    questionEl.textContent = questionPrompt.text;
-    quizContainer.appendChild(questionEl);
-
-    // Assuming the answer array contains two elements: True and False
-    questionPrompt.answer.forEach(option => {
-        const button = document.createElement('button');
-        button.textContent = option.text; // 'True' or 'False'
-        button.className = 'tf_option';
-        button.addEventListener('click', () => {
-            const isCorrect = option.correct === 1;
-            updateProgress();
-            loadNextQuestion();
-        });
-        quizContainer.appendChild(button);
-    });
-}
 
 function clearQuizContent() {
     quizContainer.innerHTML = ''; // Clears out all inner content
+    scoreDisplay.textContent = `Current Score: ${totalPointsGained}/${totalPointsPossible} Points`;
 }
 
 function addProgressBar() {
@@ -293,15 +275,28 @@ function updateProgress(isCorrect) {
         correctAnswersCount++;
         totalPointsGained += allQuestions[currentQuestionIndex].point_value;
     }
-    let progressPercentage = (totalPointsGained / totalPointsPossible) * 100;
+    if(isCorrect == false)
+    {
+        triggerRedFlash();
+    }
+    let progressPercentage = (currentQuestionIndex / allQuestions.length) * 100;
     document.getElementById('mc_progress').style.width = `${progressPercentage}%`;
     updateScoreDisplay();
+}
+
+function triggerRedFlash() {
+    const body = document.body;
+    body.classList.add('flash-effect');
+
+    setTimeout(() => {
+        body.classList.remove('flash-effect');
+    }, 1000); // This should match the duration of the animation
 }
 
 // Modified updateScoreDisplay function
 function updateScoreDisplay() {
     const scoreDisplay = document.getElementById('scoreDisplay');
-    scoreDisplay.textContent = `Score: ${totalPointsGained} Points`;
+    scoreDisplay.textContent = `Current Score: ${totalPointsGained}/${totalPointsPossible} Points`;
 }
 
 // Call updateScoreDisplay() in the same places you call updateProgress()
