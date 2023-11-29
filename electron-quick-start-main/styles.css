@@ -48,7 +48,7 @@ body {
         &>span {
             &:not(:last-child)::after {
                 color: var(--text-secondary);
-                content: " •";
+                content: " &bull;";
             }
         }
     }
@@ -148,7 +148,7 @@ button {
         &::before {
             position: relative;
             display: inline-block;
-            content: '🗙';
+            content: '&#x1F5D9;';
             line-height: 0.6em;
             transform: translateZ(-1px);
         }
