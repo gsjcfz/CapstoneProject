@@ -48,7 +48,7 @@ body {
         &>span {
             &:not(:last-child)::after {
                 color: var(--text-secondary);
-                content: " •";
+                content: " \2022";
             }
         }
     }
@@ -65,23 +65,23 @@ table {
             width: 100%;
         }
 
-        caption:first-of-type {
+        & caption {
             font-size: larger;
             font-weight: bold;
             margin-bottom: 0.5em;
         }
 
-        tr#you {
+        & tr#you {
             font-weight: bold;
         }
 
-        :is(td, th) {
+        & :is(td, th) {
             padding-top: 0.5em;
             padding-bottom: 0.5em;
         }
 
-        thead {
-            th {
+        & thead {
+            & th {
                 border-width: 0;
                 border-bottom: 2px solid var(--text-secondary);
 
@@ -100,15 +100,15 @@ table {
                 }
             }
 
-            tr {
+            & tr {
                 font-size: smaller;
                 color: var(--text-secondary);
                 font-weight: lighter;
             }
         }
 
-        tbody {
-            tr {
+        & tbody {
+            & tr {
                 background-color: transparent;
 
                 &:hover {
@@ -148,7 +148,7 @@ button {
         &::before {
             position: relative;
             display: inline-block;
-            content: '🗙';
+            content: '\1F5D9';
             line-height: 0.6em;
             transform: translateZ(-1px);
         }
@@ -472,19 +472,20 @@ h1#mc_question {
             background-color: #777;
         }
     }
-    
+
     &:is(.match_item) {
         border: 5px solid #555;
         transition: border 0.3s ease;
-        
+
         &.match_selected {
             border: 5px solid #FFF;
         }
-        
+
         &.match_greyout {
             color: #777;
             border: 5px solid #070;
         }
+
         &.match_item:hover:not(.match_item.match_greyout) {
             background-color: #777;
         }
@@ -548,10 +549,12 @@ h1#mc_question {
 /* Modal Styles */
 .modal {
     display: none;
+
     &.open {
         display: flex;
         flex-direction: column;
     }
+
     /* Hidden by default */
     position: fixed;
     left: 0;
