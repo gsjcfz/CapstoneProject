@@ -200,6 +200,7 @@ body {
 }
 
 .quiz-container {
+    max-width: 80%;
     background-color: #333;
     padding: 30px;
     border-radius: 10px;
@@ -240,7 +241,7 @@ body {
     cursor: pointer;
 }
 
-.check_all_option:hover {
+.check_all_option_label:hover {
     background-color: #555;
 }
 
