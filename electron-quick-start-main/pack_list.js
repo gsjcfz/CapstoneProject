@@ -24,11 +24,26 @@ function addPack(id, name, points_total, pack_score) {
     // This is the div that represents the user's score for this pack
     const newProgress = document.createElement("div");
     newProgress.className = "progress";
+    // This is the div that contains the score text
+    const scoreDiv = document.createElement("div");
+    scoreDiv.style.paddingLeft = "5px";
+    scoreDiv.style.overflow = "visible";
+    // This is the text for the score bar
+    newProgress.appendChild(scoreDiv);
+    const score = document.createTextNode(`${pack_score}/${points_total}`);
+    scoreDiv.appendChild(score);
     if (pack_score == null) { 
         pack_score = 0; 
-        newProgressBar.style.backgroundColor = "#555"
+        newProgressBar.style.backgroundColor = "#555";
+        score.textContent = "New";
+        scoreDiv.style.color = "#007BFF";
     }
+    // Set the width and color of the progress bar
     newProgress.style.width = `${(pack_score/points_total)*100}%`;
+    let redVal = (12 - Math.trunc((pack_score/points_total)*8)).toString(16);
+    let greenVal = (4 + Math.trunc((pack_score/points_total)*8)).toString(16);
+    console.log(name, redVal, greenVal)
+    newProgress.style.backgroundColor = `#${redVal}${greenVal}4`
 
     // Now we append up the list
     newProgressBar.appendChild(newProgress)
