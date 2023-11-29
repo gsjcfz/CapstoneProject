@@ -1,3 +1,13 @@
+:root {
+    --accent-red: #700;
+    --accent-red-dimmer: #500;
+    --accent-green: #070;
+    --accent-green-dimmer: #060;
+    --accent-green-lighter: #282;
+    --text-primary: #FFF;
+    --text-secondary: #999;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #1e1e1e;
@@ -19,30 +29,183 @@ body {
     color: white;
 }
 
-.game-text h1{
+.game-text h1 {
     color: white;
 }
 
-.settings ul{
+.settings ul {
     color: white;
 }
+
+.pack-modal {
+    & #pack-title {
+        margin-bottom: 0.1em;
+    }
+    & #pack-details {
+        margin-top: 0.1em;
+        & > span {
+            &:not(:last-child)::after {
+                color: var(--text-secondary);
+                content: " •";
+            }
+        }
+    }
+}
+
+table {
+    &.leaderboard {
+        table-layout: fixed;
+        border: 0;
+        border-collapse: collapse;
+        margin-top: 2em;
+
+        &#pack-leaderboard {
+            width: 100%;
+        }
+
+        caption:first-of-type {
+            font-size: larger;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+
+        tr#you {
+            font-weight: bold;
+        }
+
+        :is(td, th) {
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+        
+        thead {
+            th {
+                border-width: 0;
+                border-bottom: 2px solid var(--text-secondary);
+                
+                &:nth-child(1) {
+                    width: 20%;
+                    max-width: 4em;
+                }
+                &:nth-child(2) {
+                    min-width: 16em;
+                }
+                &:nth-child(3) {
+                    width: 30%;
+                    min-width: 8em;
+                }
+            }
+
+            tr {
+                font-size: smaller;
+                color: var(--text-secondary);
+                font-weight: lighter;
+            }
+        }
+
+        tbody {
+            tr {
+                background-color: transparent;
+
+                &:hover {
+                    backdrop-filter: brightness(1.25);
+                }
+            }
+        }
+    }
+}
+
 button {
     margin: 1em;
     padding: 0.5em 1em;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color ease 0.125s;
+
+    &:hover {
+        background-color: #555;
+    }
+
+    &.close-x {
+        display: block;
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        margin:0;
+        padding: 0.1em;
+        width: 1em;
+        height: 1em;
+        background-color: transparent;
+        font-size: larger;
+        color: var(--text-secondary);
+        transform-style: preserve-3d;
+
+        &::before {
+            position: relative;
+            display: inline-block;
+            content: '🗙';
+            line-height: 0.6em;
+            transform: translateZ(-1px);
+        }
+
+        &:hover::before {
+            filter: brightness(1.5);
+        }
+    }
+    
+    &.big-btn {
+        display: inline-block;
+        position: relative;
+        margin: 0.25em;
+        z-index: 1;
+        font-size: x-large;
+        font-weight: bold;
+        color: var(--text-primary);
+        background-color: var(--accent-green);
+        transition: transform ease .125s;
+        border: 4px solid var(--accent-green-lighter);
+        border-radius: 32px;
+        transform-style: preserve-3d;
+        transform: translate3d(0, 0, 1px);
+    
+        &::before,
+        &::after {
+            content: " ";
+            position: absolute;
+            inset: -4px;
+            border-radius: 32px;
+        }
+        &::before {
+            transition: transform ease .125s;
+            transform: translate3d(0,8px,-1px);
+            background-color: var(--accent-green-dimmer);
+        }
+        &::after {
+            transition: background-color ease .125;
+            transform: translateZ(2px);
+            background-color: transparent;
+        }
+        &:hover {
+            transform: translate3d(0,4px,1px);
+    
+            &::after {
+                background-color: rgba(255,255,255, 0.05);
+            }
+            &::before {
+                transform: translate3d(0,4px,-1px);
+            }
+        }
+    }    
 }
 
-button:hover {
-    background-color: #555;
-}
 
 #backToMenu {
     position: fixed;
     top: 10px;
     left: 10px;
 }
+
 body {
     font-family: Arial, sans-serif;
     background-color: #222;
@@ -58,11 +221,12 @@ body {
 .skeleton {
     animation: skeleton-loading 1s ease-in-out infinite alternate;
 }
-  
+
 @keyframes skeleton-loading {
     0% {
         background-color: #555;
     }
+
     100% {
         background-color: #888;
     }
@@ -138,7 +302,8 @@ h1#mc_question {
     row-gap: 10px;
 }
 
-.mc_option, .match_item {
+.mc_option,
+.match_item {
     padding: 20px;
     background-color: #555;
     color: white;
@@ -150,7 +315,8 @@ h1#mc_question {
     text-align: center;
 }
 
-.mc_option:hover, .match_item:hover {
+.mc_option:hover,
+.match_item:hover:not(.match_item.match_greyout) {
     background-color: #777;
 }
 
@@ -169,18 +335,51 @@ h1#mc_question {
 }
 
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
 }
+
 
 .match_item.match_fail {
     color: #700;
@@ -191,7 +390,8 @@ h1#mc_question {
 
 /* Modal Styles */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: fixed;
     left: 0;
     top: 0;
@@ -244,7 +444,8 @@ h1#mc_question {
 .progress {
     background-color: #007BFF;
     height: 100%;
-    width: 0%; /* Initially empty */
+    width: 0%;
+    /* Initially empty */
 }
 
 .pack-progress-bar {
@@ -259,7 +460,8 @@ h1#mc_question {
 .pack-progress {
     background-color: #007BFF;
     height: 100%;
-    width: 0%; /* Initially empty */
+    width: 0%;
+    /* Initially empty */
 }
 
 /* ... Existing Styles ... */
@@ -325,7 +527,8 @@ h1#mc_question {
 }
 
 .register-container {
-    width: 350px; /* Increased width */
+    width: 350px;
+    /* Increased width */
     margin: 0 auto;
     padding: 2em;
     background-color: #333;
@@ -361,7 +564,8 @@ h1#mc_question {
 
 #iv-question-type-text {
     height: 30px;
-    width: 200px; /* Increased width */
+    width: 200px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -373,7 +577,7 @@ h1#mc_question {
     margin-right: 10px;
     top: 10px;
     height: 30px;
-} 
+}
 
 .iv-question-prompt {
     position: relative;
@@ -383,7 +587,8 @@ h1#mc_question {
 }
 
 #iv-prompt-text {
-    width: 200px; /* Increased width */
+    width: 200px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -421,7 +626,8 @@ h1#mc_question {
 
 #iv-number-of-answers-text {
     position: relative;
-    width: 200px; /* Increased width */
+    width: 200px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -464,7 +670,8 @@ h1#mc_question {
 }
 
 #correct-answer-text {
-    width: 230px; /* Increased width */
+    width: 230px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -486,7 +693,8 @@ h1#mc_question {
 
 #iv-answer-list-text {
     height: 25px;
-    width: 100px; /* Increased width */
+    width: 100px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -503,7 +711,8 @@ h1#mc_question {
 
 #iv-answer-list-A-text {
     height: 25px;
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -529,7 +738,8 @@ h1#mc_question {
 
 #iv-answer-list-B-text {
     height: 25px;
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -554,7 +764,8 @@ h1#mc_question {
 
 #iv-answer-list-C-text {
     height: 25px;
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -580,7 +791,8 @@ h1#mc_question {
 
 #iv-answer-list-D-text {
     height: 25px;
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -606,7 +818,8 @@ h1#mc_question {
 
 #iv-answer-list-E-text {
     height: 25px;
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -633,7 +846,8 @@ h1#mc_question {
 
 #iv-answer-list-F-text {
     height: 25px;
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -678,7 +892,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-top: 15px;
     height: 25px;
-    width: 250px; /* Increased width */
+    width: 250px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -732,7 +947,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -755,7 +971,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -786,7 +1003,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -809,7 +1027,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -840,7 +1059,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -863,7 +1083,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -894,7 +1115,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -917,7 +1139,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -948,7 +1171,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -971,7 +1195,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1002,7 +1227,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1025,7 +1251,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1063,7 +1290,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-top: 15px;
     height: 25px;
-    width: 250px; /* Increased width */
+    width: 250px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1117,7 +1345,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 50px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1140,7 +1369,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1171,7 +1401,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 50px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1194,7 +1425,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1225,7 +1457,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 50px;
-    width: 80px; /* Increased width */
+    width: 80px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1248,7 +1481,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-bottom: 10px;
     height: 25px;
-    width: 120px; /* Increased width */
+    width: 120px;
+    /* Increased width */
     align-self: center;
     background-color: #333;
     border-radius: 8px;
@@ -1292,7 +1526,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-top: 15px;
     height: 25px;
-    width: 250px; /* Increased width */
+    width: 250px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1339,7 +1574,8 @@ h1#mc_question {
     margin-left: 10px;
     margin-top: 15px;
     height: 50px;
-    width: 250px; /* Increased width */
+    width: 250px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1388,7 +1624,8 @@ h1#mc_question {
     margin-top: 15px;
     margin-bottom: 10px;
     height: 25px;
-    width: 180px; /* Increased width */
+    width: 180px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1412,7 +1649,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-1-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1436,7 +1674,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-2-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1458,7 +1697,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-3-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1490,7 +1730,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-4-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1514,7 +1755,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-5-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1536,7 +1778,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-6-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1568,7 +1811,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-7-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1590,7 +1834,8 @@ h1#mc_question {
 }
 
 #iv-sa-correct-answer-8-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1612,7 +1857,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-list-text {
-    width: 100px; /* Increased width */
+    width: 100px;
+    /* Increased width */
     background-color: #333;
     border-radius: 8px;
     text-align: center;
@@ -1634,7 +1880,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-A-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1657,7 +1904,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-B-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1687,7 +1935,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-C-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1710,7 +1959,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-D-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1740,7 +1990,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-E-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1763,7 +2014,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-F-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1793,7 +2045,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-G-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
@@ -1816,7 +2069,8 @@ h1#mc_question {
 }
 
 #iv-sa-answer-H-text {
-    width: 30px; /* Increased width */
+    width: 30px;
+    /* Increased width */
     height: 30px;
     background-color: #333;
     border-radius: 8px;
