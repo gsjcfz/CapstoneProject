@@ -31,7 +31,8 @@ async function login(user) {
     let response = {
         success : false,
         message : "Username or password is incorrect",
-        token   : null
+        token   : null,
+        instructor  : false
     };
 
     if (get_user[0] === undefined) {
@@ -48,6 +49,7 @@ async function login(user) {
     response.success = true
     response.message = "Login successful"
     response.token = mycrypt.generateToken(user.name);
+    response.instructor = Boolean(get_user.professor);
     return response;
 }
 
