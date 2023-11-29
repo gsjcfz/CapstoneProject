@@ -206,7 +206,7 @@ body {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-#submit-btn {
+.submit-btn {
     padding: 10px;
     border: none;
     border-radius: 4px;
@@ -217,9 +217,21 @@ body {
     margin-top: 25px;
 }
 
-#submit-btn:hover {
+.submit-btn:hover {
     background-color: #555;
 }
+
+.matching_option {
+    display: inline;
+    align-items: center;
+    margin-right: 10px;
+    max-width: 400px;
+    padding: 10px;
+    background-color: #222;
+    transition: background-color 0.7s ease;
+    cursor: pointer;
+}
+
 
 .check_all_option {
     margin-right: 5px;
@@ -240,7 +252,7 @@ body {
     cursor: pointer;
 }
 
-.check_all_option:hover {
+.checkbox_all_option_label:hover {
     background-color: #555;
 }
 
@@ -2017,6 +2029,9 @@ h1#mc_question {
     font-size: 2em;
 }
 
+.content-container {
+    max-width: 80%;
+}
 /* Reusing the same styles for input-group, label, input, and button from the login page */
 @keyframes redFlash {
     0% { background-color: red; }

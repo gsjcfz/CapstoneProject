@@ -208,20 +208,23 @@ function addMatchingQuestionFromServerData(questionData) {
                 const label = document.createElement('label');
                 const radio = document.createElement('input');
                 radio.type = 'radio';
-                radio.className = 'matching_option';
+                radio.className = 'check_all_option';
                 radio.value = option.correct; // Store whether the option is correct
                 radio.name = prompt.text;
 
+                label.className = 'matching_option'
                 label.appendChild(radio);
                 label.appendChild(document.createTextNode(option.text));
                 quizContainer.appendChild(label);
             });
         });
+        const br = document.createElement('br');
 
         const submitButton = document.createElement('button');
         submitButton.textContent = 'Submit';
         submitButton.className = 'submit-btn';
         submitButton.addEventListener('click', () => handleMatchingSubmission(questionData.prompt));
+        quizContainer.appendChild(br);
         quizContainer.appendChild(submitButton);
     } else {
         console.error('Invalid question type or no prompts found for Matching');
@@ -231,10 +234,10 @@ function addMatchingQuestionFromServerData(questionData) {
 function handleMatchingSubmission(prompts) {
     
     let isCorrect = true;
-    const checkboxes = document.querySelectorAll('.matching_option');
-    checkboxes.forEach((checkbox, index) => {
+    const radios = document.querySelectorAll('.check_all_option');
+    radios.forEach((radio, index) => {
         const shouldBeChecked = prompts[Math.floor(index / prompts[0].answer.length)].answer[index % prompts[0].answer.length].correct === 1;
-        if (checkbox.checked !== shouldBeChecked) {
+        if (radio.checked !== shouldBeChecked) {
             isCorrect = false;
         }
     });
@@ -275,6 +278,10 @@ function updateProgress(isCorrect) {
     if (isCorrect) {
         correctAnswersCount++;
         totalPointsGained += allQuestions[currentQuestionIndex].point_value;
+    }
+    if(isCorrect == false)
+    {
+        triggerRedFlash();
     }
     // Add any other logic you need for incorrect answers or other conditions
 
