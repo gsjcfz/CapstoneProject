@@ -48,7 +48,7 @@ body {
         &>span {
             &:not(:last-child)::after {
                 color: var(--text-secondary);
-                content: " &bull;";
+                content: " \2022";
             }
         }
     }
@@ -148,7 +148,7 @@ button {
         &::before {
             position: relative;
             display: inline-block;
-            content: '&#x1F5D9;';
+            content: '\1F5D9';
             line-height: 0.6em;
             transform: translateZ(-1px);
         }
