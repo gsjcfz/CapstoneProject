@@ -9,20 +9,23 @@
 </head>
 <body>
     <div class="menu">
-        <h1>My Game</h1>
+        <h1>Circuit Showdown</h1>
         <button id="start">Start Game</button>
-        <button id="settings">Settings</button>
         <button id="instructor-view">Instructor View</button>
         <button id="exit">Exit</button>
     </div>
 
     <script>
+        window.onload = function() {
+            let instructor = localStorage.getItem("instructor");
+            if (instructor == 0) {
+                const iv_button = document.getElementById("instructor-view");
+                iv_button.remove();
+            }
+        };
+
         document.getElementById('start').addEventListener('click', () => {
             window.myAPI.send('navigate', 'game');
-        });
-
-        document.getElementById('settings').addEventListener('click', () => {
-            window.myAPI.send('navigate', 'settings');
         });
 
         document.getElementById('instructor-view').addEventListener('click', () => {
