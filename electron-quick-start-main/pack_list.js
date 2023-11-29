@@ -1,4 +1,5 @@
 import config from './config.js';
+import wakePackModal from './pack_details.js';
 
 function addPack(id, name, points_total, pack_score) {
     // This will be the container that will contain the new pack
@@ -9,13 +10,13 @@ function addPack(id, name, points_total, pack_score) {
     // This is the button that will represent the pack
     const newButton = document.createElement("button");
     newButton.className = "pack";
-    const packName = document.createTextNode(name)
-    newButton.appendChild(packName)
+    const packName = document.createTextNode(name);
+    newButton.appendChild(packName);
     // This is the buttons functionality
     newButton.addEventListener('click', ()=> {
         localStorage.setItem("currentPackID", id)
         // put the navigation controls here
-        window.myAPI.send('navigate', 'launch');
+        wakePackModal(id);
     });
 
     // This is the base div for the progress bar
@@ -31,10 +32,10 @@ function addPack(id, name, points_total, pack_score) {
     newProgress.style.width = `${(pack_score/points_total)*100}%`;
 
     // Now we append up the list
-    newProgressBar.appendChild(newProgress)
-    newButton.appendChild(newProgressBar)
-    newDiv.appendChild(newButton)
-    packContainer.appendChild(newDiv)
+    newProgressBar.appendChild(newProgress);
+    newButton.appendChild(newProgressBar);
+    newDiv.appendChild(newButton);
+    packContainer.appendChild(newDiv);
 }
 
 document.addEventListener('DOMContentLoaded', async function(event) {
@@ -56,9 +57,9 @@ document.addEventListener('DOMContentLoaded', async function(event) {
                 skeletons.item(i).remove();
             }
             // Add the pack data
+            localStorage.setItem("currentPackList", JSON.stringify(data));
             for (let i = 0; i < data.data.length; i++) {
                 let obj = data.data[i];
-        
                 addPack(obj.ID, obj.name, obj.points_total, obj.pack_score);
             }
         });

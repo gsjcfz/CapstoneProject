@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <script type="module" src="config.js"></script>
     <script type="module" src="pack_list.js" defer></script>
+    <script type="module" src="pack_details.js" defer></script>
 
     <!-- Return to Menu button -->
     <button id="return_to_menu" class="menu-button">Return to Menu</button>
@@ -26,6 +27,34 @@
             <button class="skeleton skeleton-pack"></button>
         </div>
 
+    </div>
+
+    <div class="modal pack-modal">
+        <div id="pack-deet-container" class="modal-content">
+            <button class="close close-x"></button>
+            <h2 id="pack-title">Title</h2>
+            <p id="pack-details">
+                <span id="pack-instructor">by Teachy McTeachface</span>
+                <span id="q-count">69 questions</span> 
+            </p>
+            <button id="pack-start" class="big-btn">START</button>
+            <table id="pack-leaderboard" class="leaderboard">
+                    <caption>Pack Leaderboard</caption>
+                    <thead>
+                        <tr>
+                            <th>Rank</th> <th>Name</th> <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td> <td>Ronald</td> <td>420</td>
+                        </tr>
+                        <tr id="you">
+                            <td>2</td> <td>YOU</td> <td>333</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

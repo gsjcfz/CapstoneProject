@@ -41,9 +41,11 @@ body {
     & #pack-title {
         margin-bottom: 0.1em;
     }
+
     & #pack-details {
         margin-top: 0.1em;
-        & > span {
+
+        &>span {
             &:not(:last-child)::after {
                 color: var(--text-secondary);
                 content: " •";
@@ -77,19 +79,21 @@ table {
             padding-top: 0.5em;
             padding-bottom: 0.5em;
         }
-        
+
         thead {
             th {
                 border-width: 0;
                 border-bottom: 2px solid var(--text-secondary);
-                
+
                 &:nth-child(1) {
                     width: 20%;
                     max-width: 4em;
                 }
+
                 &:nth-child(2) {
                     min-width: 16em;
                 }
+
                 &:nth-child(3) {
                     width: 30%;
                     min-width: 8em;
@@ -132,7 +136,7 @@ button {
         position: absolute;
         top: 0.5em;
         right: 0.5em;
-        margin:0;
+        margin: 0;
         padding: 0.1em;
         width: 1em;
         height: 1em;
@@ -153,7 +157,7 @@ button {
             filter: brightness(1.5);
         }
     }
-    
+
     &.big-btn {
         display: inline-block;
         position: relative;
@@ -168,7 +172,7 @@ button {
         border-radius: 32px;
         transform-style: preserve-3d;
         transform: translate3d(0, 0, 1px);
-    
+
         &::before,
         &::after {
             content: " ";
@@ -176,27 +180,31 @@ button {
             inset: -4px;
             border-radius: 32px;
         }
+
         &::before {
             transition: transform ease .125s;
-            transform: translate3d(0,8px,-1px);
+            transform: translate3d(0, 8px, -1px);
             background-color: var(--accent-green-dimmer);
         }
+
         &::after {
             transition: background-color ease .125;
             transform: translateZ(2px);
             background-color: transparent;
         }
+
         &:hover {
-            transform: translate3d(0,4px,1px);
-    
+            transform: translate3d(0, 4px, 1px);
+
             &::after {
-                background-color: rgba(255,255,255, 0.05);
+                background-color: rgba(255, 255, 255, 0.05);
             }
+
             &::before {
-                transform: translate3d(0,4px,-1px);
+                transform: translate3d(0, 4px, -1px);
             }
         }
-    }    
+    }
 }
 
 
@@ -217,6 +225,7 @@ body {
     padding: 0;
     color: #eee;
 }
+
 
 .skeleton {
     animation: skeleton-loading 1s ease-in-out infinite alternate;
@@ -313,25 +322,29 @@ h1#mc_question {
     border-radius: 8px;
     font-size: 18px;
     text-align: center;
-}
 
-.mc_option:hover,
-.match_item:hover:not(.match_item.match_greyout) {
-    background-color: #777;
-}
-
-.match_item {
-    border: 5px solid #555;
-    transition: border 0.3s ease;
-}
-
-.match_item.match_selected {
-    border: 5px solid #FFF;
-}
-
-.match_item.match_greyout {
-    color: #777;
-    border: 5px solid #070;
+    &:is(.mc_option) {
+        &:hover {
+            background-color: #777;
+        }
+    }
+    
+    &:is(.match_item) {
+        border: 5px solid #555;
+        transition: border 0.3s ease;
+        
+        &.match_selected {
+            border: 5px solid #FFF;
+        }
+        
+        &.match_greyout {
+            color: #777;
+            border: 5px solid #070;
+        }
+        &.match_item:hover:not(.match_item.match_greyout) {
+            background-color: #777;
+        }
+    }
 }
 
 @keyframes shake {
@@ -391,6 +404,10 @@ h1#mc_question {
 /* Modal Styles */
 .modal {
     display: none;
+    &.open {
+        display: flex;
+        flex-direction: column;
+    }
     /* Hidden by default */
     position: fixed;
     left: 0;

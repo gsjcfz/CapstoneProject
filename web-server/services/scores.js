@@ -17,7 +17,7 @@ async function pack_exists(pack_id) {
 async function getPackLeaderboard(pack_id) {
     // This makes constructing `query` easier    
     const sql_query = `
-SELECT \`username\`, \`package_score\`
+SELECT \`username\`, \`pack_score\`
 FROM \`USER_SCORE\`
 WHERE \`pack_ID\`=${pack_id}
 ORDER BY \`pack_score\` DESC
@@ -46,7 +46,6 @@ LIMIT 1;
         score: -1,
     };
     if (rows[0]) {
-        console.log(rows);
         result.score = rows[0].pack_score;
     }
     return result;

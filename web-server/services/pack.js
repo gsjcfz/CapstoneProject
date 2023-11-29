@@ -19,9 +19,9 @@ async function listPacks(){
 /* GET list of packs with user score */
 async function listPacksScores(username){
   const rows = await db.query(
-    `SELECT T.\`ID\`, T.\`name\`, T.\`points_total\`, U.\`pack_score\`
+    `SELECT T.\`ID\`, T.\`name\`, T.\`points_total\`, U.\`pack_score\`, T.\`instructor\`, T.\`question_count\`
     FROM (
-        (SELECT P.\`ID\`, P.\`name\`, SUM(Q.point_value) AS \`points_total\`
+        (SELECT P.\`ID\`, P.\`name\`, P.\`username\` AS \`instructor\`, SUM(Q.point_value) AS \`points_total\`, COUNT(Q.point_value) AS \`question_count\`
           FROM \`PACK\` P
               JOIN \`QUESTION\` Q
               ON P.\`ID\`=Q.\`pack_ID\`
@@ -35,7 +35,6 @@ async function listPacksScores(username){
     `
   );
   const data = helper.getTuples(rows);
-
   return {
     data
   }
