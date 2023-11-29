@@ -276,12 +276,16 @@ function updateProgress(isCorrect) {
         correctAnswersCount++;
         totalPointsGained += allQuestions[currentQuestionIndex].point_value;
     }
-    if(isCorrect == false)
-    {
-        triggerRedFlash();
-    }
+    // Add any other logic you need for incorrect answers or other conditions
+
+    // Calculate progress percentage
     let progressPercentage = (currentQuestionIndex / allQuestions.length) * 100;
-    document.getElementById('mc_progress').style.width = `${progressPercentage}%`;
+
+    // Update the progress bar width with animation
+    const progressBar = document.getElementById('mc_progress');
+    progressBar.style.width = `${progressPercentage}%`;
+
+    // Update score display or any other UI elements as needed
     updateScoreDisplay();
 }
 

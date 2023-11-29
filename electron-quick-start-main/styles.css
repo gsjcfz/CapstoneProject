@@ -200,7 +200,6 @@ body {
 }
 
 .quiz-container {
-    max-width: 80%;
     background-color: #333;
     padding: 30px;
     border-radius: 10px;
@@ -241,7 +240,7 @@ body {
     cursor: pointer;
 }
 
-.check_all_option_label:hover {
+.check_all_option:hover {
     background-color: #555;
 }
 
@@ -366,6 +365,7 @@ h1#mc_question {
 /* ... Existing Styles ... */
 
 .progress-bar {
+
     background-color: #444;
     border-radius: 5px;
     height: 20px;
@@ -375,6 +375,7 @@ h1#mc_question {
 }
 
 .progress {
+    transition: width 1s ease; /* Adjust the time (0.5s) to control the speed of the animation */
     background-color: #007BFF;
     height: 100%;
     width: 0%; /* Initially empty */
